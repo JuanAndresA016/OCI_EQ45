@@ -1,0 +1,13 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+}
+
+a{
+  text-decoration: none;
+}
+
+.main_content{
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+}
