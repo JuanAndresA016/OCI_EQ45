@@ -1,0 +1,22 @@
+/* .taskUser_container{
+    border: 1px solid #ccc;
+    width: 100%;
+    background-color: #fff;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    
+} */
+
+.si{
+    
+    
+}
+
+.taskUser_container{
+    overflow-x: auto;
+    height: 100%;
+    
+}

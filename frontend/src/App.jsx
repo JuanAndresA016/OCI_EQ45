@@ -11,31 +11,6 @@ export default function App() {
   );
 }
 
-// import Box from '@mui/material/Box';
-// import { BarChart } from '@mui/x-charts/BarChart';
-
-// const completadas = [20];
-// const proceso = [10];
-// const vencidas = [2]
-// const xLabels = [
-//   'Tareas',
-// ];
-
-// export default function SimpleBarChart() {
-//   return (
-//     <Box sx={{ width: '100%', height: 300 }}>
-//       <BarChart
-//         series={[
-//           { data: completadas, label: 'completadas', id: 'pvId' },
-//             { data: proceso, label: 'En proceso', id: 'uvId' },
-//             {data: vencidas, label: 'vencidas'}
-//         ]}
-//         xAxis={[{ data: xLabels, height: 28 }]}
-//         yAxis={[{ width: 50 }]}
-//       />
-//     </Box>
-//   );
-// }
 
 //line
 
