@@ -1,38 +1,72 @@
+
 import * as React from 'react';
 import { Box, Stack, Typography, Avatar } from '@mui/material';
 import "./TaskUser.css"
-const data = [
-    { name: 'Carlos Mendoza', value: 4, initials: 'CM' },
-    { name: 'Angela Garcia', value: 3, initials: 'AG' },
-    { name: 'Victor Lopez', value: 2, initials: 'VL' },
-    { name: 'Sofía Martínez', value: 1, initials: 'SM' },
-];
+import { useState, useEffect } from 'react';
+import { OrbitProgress } from "react-loading-indicators";
 
-const maxValue = Math.max(...data.map((d) => d.value));
 
 export default function TaskUser() {
+
+    const [dataArray, setDataArray] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+
+
+    async function fetchData(url) {
+        fetch(url, {
+            method: "GET",
+        })
+        .then(res => res.json())
+        .then(data => {
+            const dataWithInitials = data.map(item => ({
+                ...item,
+                initials: getInitials(item.name)
+
+
+            }));
+
+            setDataArray(dataWithInitials);
+            setIsLoading(false);
+        });
+    }
+
+    const getInitials = (name) => {
+        if (!name) return "";
+
+        const words = name.trim().split(/\s+/);
+
+        if (words.length === 1) {
+            return words[0][0].toUpperCase();
+        }
+
+        return (words[0][0] + words[words.length - 1][0]).toUpperCase();
+    };
+
+    useEffect(() => {
+        fetchData("http://localhost:8080/api/tareas/por-persona");
+    }, []);
+
+    const maxValue = Math.max(...dataArray.map(d => d.value), 1);
+
     return (
-        <>
+        <div className="taskUser_container">
+            <div className="si">
+                <span style={{ display: "block", textAlign: "center" }}>
+                    Productividad del equipo
+                </span>
 
-            <div className="taskUser_container">
-                <div className="si">
-                    <span style={{display: "block", textAlign: "Center" }}>
-                        Productividad del equipo
-                    </span>
+                {isLoading ? <OrbitProgress color="#4040FB" size="medium" text="" textColor="" /> : 
 
-                    <Box
+                <Box
                     sx={{
                         p: 3,
                         borderRadius: 3,
                         width: 600,
-
-
                     }}
                 >
-                    
 
                     <Stack spacing={2}>
-                        {data.map((item, index) => (
+                        {dataArray.map((item, index) => (
                             <Stack
                                 key={index}
                                 direction="row"
@@ -77,11 +111,8 @@ export default function TaskUser() {
                         ))}
                     </Stack>
                 </Box>
-                </div>
-                
+}
             </div>
-
-        </>
-
+        </div>
     );
 }

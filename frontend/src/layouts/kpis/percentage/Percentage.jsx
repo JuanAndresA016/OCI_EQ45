@@ -6,7 +6,7 @@ import { Gauge } from '@mui/x-charts/Gauge';
 export default function Percentage() {
   return (
     <div style={{ position: 'relative', width: 200, height: 200 }}>
-      <Gauge width={200} height={200} value={72} text={""} />
+      <Gauge width={200} height={200} value={93.3} text={""} />
 
       <div
         style={{
@@ -18,7 +18,7 @@ export default function Percentage() {
         }}
       >
         <div style={{ fontSize: 14, color: '#888' }}><span>En tiempo</span></div>
-        <div style={{ fontSize: 28, fontWeight: 'bold', color: "#000" }}><span style={{color: "#000"}}>72%</span></div>
+        <div style={{ fontSize: 28, fontWeight: 'bold', color: "#000" }}><span style={{color: "#000"}}>93.3%</span></div>
       </div>
     </div>
   );

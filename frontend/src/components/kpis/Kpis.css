@@ -6,7 +6,6 @@
 
 .dashboard_container{
     background-color: #FAFAFA;
-    height: 200vh;
 }
 
 .dashboard_container_header{
@@ -41,6 +40,7 @@
         border: none;
         outline: none;
         width: 100%;
+        background-color: transparent;
         
     }
     

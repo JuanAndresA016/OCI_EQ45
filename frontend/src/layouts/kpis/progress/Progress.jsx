@@ -2,13 +2,13 @@ import React from "react";
 import "./Progress.css";
 
 export default function Progress() {
-  const value = 50;
+  const value = 80;
 
   return (
     <>
       <div className="progress">
         <div className="progress_container">
-          <span>Progreso General</span>
+          <span>Progreso General 80%</span>
 
           {/* Barra personalizada */}
           <div className="progressBar">

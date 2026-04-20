@@ -3,7 +3,7 @@ import Stack from '@mui/material/Stack';
 import { LineChart } from '@mui/x-charts/LineChart';
 
 const margin = { right: 24 };
-const data = [10, 25, 40, 55, 72, 72];
+const data = [10, 25, 40, 55, 60, 80];
 const xData = ['Semana 1', 'Semana 2', 'Semana 3', 'Semana 4', 'Semana 5', 'Semana 6'];
 export default function Line() {
   return (
