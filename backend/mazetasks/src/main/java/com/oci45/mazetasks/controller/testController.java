@@ -1,21 +1,35 @@
 package com.oci45.mazetasks.controller;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.sql.DataSource;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import javax.sql.DataSource;
 
 @RestController
 public class testController {
 
-    @Autowired
-    private DataSource dataSource;
+    private final DataSource dataSource;
 
-    @GetMapping("/test-db")
-public String test() {
-    try (var conn = dataSource.getConnection()) {
-        return "Conectado ✅";
-    } catch (Exception e) {
-        return e.getMessage();
+    public testController(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
-}
+
+    @GetMapping("/users")
+    public String getUsers() throws Exception {
+        StringBuilder result = new StringBuilder();
+
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT * FROM personas")) {
+
+            while (rs.next()) {
+                result.append(rs.getString("NOMBRE")).append("\n");
+            }
+        }
+
+        return result.toString();
+    }
 }

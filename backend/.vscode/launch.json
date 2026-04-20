@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-MazetasksApplication<mazetasks>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.oci45.mazetasks.MazetasksApplication",
+            "projectName": "mazetasks",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
