@@ -1,36 +1,47 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import "./Login.css";
+import { href } from "react-router-dom";
 
 export default function Login() {
 
-    const getUser = async () => {
-  const token = localStorage.getItem("token");
+//     const getUser = async () => {
+//   const token = localStorage.getItem("token");
 
-  const response = await fetch("http://localhost:8080/auth/me", {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      "Authorization": "Bearer " + token
-    }
-  });
+//   const response = await fetch("http://localhost:8080/auth/me", {
+//     method: "GET",
+//     headers: {
+//       "Content-Type": "application/json",
+//       "Authorization": "Bearer " + token
+//     }
+//   });
 
-  if (!response.ok) {
-    throw new Error("No se pudo obtener el usuario");
-  }
+//   if (!response.ok) {
+//     throw new Error("No se pudo obtener el usuario");
+//   }
 
-  const data = await response.json();
-  console.log("Usuario:", data);
+//   const data = await response.json();
+//   console.log("Usuario:", data);
 
-  return data;
-};
+//   return data;
+// };
 
+useEffect(() =>{
+  console.log(localStorage.getItem("token"))
+})
 
-useEffect(() => {
-    getUser();
-},[])
+const [error, SetError] = useState("");
 
 
   const login = async (email, password) => {
+
+    if(email == "" || password == ""){
+      SetError("Llena todos los campos");
+      setTimeout(() => {
+          SetError("");
+      }, 5000)
+    }else{
+
+    
     const response = await fetch("http://localhost:8080/auth/login", {
       method: "POST",
       headers: {
@@ -43,9 +54,23 @@ useEffect(() => {
     });
 
     const data = await response.json();
+
+    if("message" in data){
+      SetError(data.message);
+      setTimeout(() =>{
+        SetError("")
+      },5000)
+    }
+    else{
+
+    
     console.log(data);
 
     localStorage.setItem("token", data.token);
+    window.location.href = "http://localhost:5173/kpis"
+    }
+
+  }
   };
 
   return (
@@ -66,6 +91,7 @@ useEffect(() => {
 
       <main className="main_login">
         <h1 align="center">Login</h1>
+        {error == "" ? <span></span> : <div className="error"><span>{error}</span></div>}
 
         <div className="main_login_formContainer">
           <div className="main_login_formContainer_container">

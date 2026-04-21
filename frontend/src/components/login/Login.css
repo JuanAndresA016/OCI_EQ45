@@ -209,3 +209,45 @@
         font-size: 14px;
     }
 }
+
+@media (max-width: 1000px){
+    .main_login_formContainer_container{
+        .form_container{
+            .login_form{
+                width: 100% !important; 
+            }
+        }
+    }
+}
+
+.success{
+    padding: 10px;
+    background-color: rgb(2, 158, 70);
+    color: #fff;
+    span{
+        font-weight: 600;
+        font-family: "Inter", sans-serif;
+    }
+}
+
+@media (max-width: 865px){
+    .main_login_formContainer_container{
+        grid-template-columns: repeat(1,1fr) !important;
+    }
+
+    .logo_container{
+        border: none !important;
+    }
+
+    .logo_container1{
+        border: none !important;
+    }
+
+    .main_login_formContainer_container{
+        .form_container{
+            .login_form{
+                width: 100% !important; 
+            }
+        }
+    }
+}

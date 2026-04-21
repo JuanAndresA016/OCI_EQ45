@@ -209,3 +209,17 @@
         font-size: 14px;
     }
 }
+
+.error{
+    padding: 10px;
+    background-color: #f00;
+    color: #fff;
+    span{
+        font-weight: 600;
+        font-family: "Inter", sans-serif;
+    }
+}
+
+.view{
+    display: none;
+}
