@@ -1,0 +1,176 @@
+.dashboard{
+    background-color: #FAFAFA;
+}
+
+.dasboard_container_content_projects{
+    h2{
+        font-family: "Inter", sans-serif;
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.content_projects_info{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
+.content_projects_info_element{
+    flex-grow: 1;
+    min-height: 100px;
+    width: 100%;
+    background-color: #fff;
+    border: 1px solid #E1E1E1;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+    span{
+        font-size: 18px;
+    }
+
+    .total{
+    font-size: 30px;
+    color: #4040FB;
+    font-weight: 600;
+}
+
+.active{
+    font-size: 30px;
+    color: #007D7E;
+    font-weight: 600;
+
+}
+
+.concluded{
+    font-size: 30px;
+    font-weight: 600;
+    color: #E6B400;
+}
+}
+
+.content_projects_myprojects, .content_projects_projects{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+
+.content_projects_myproyects_element{
+    background-color: #fff;
+    position: relative;
+    padding: 25px;
+    border: 1px solid #E1E1E1;
+    border-radius: 10px;
+    font-family: "Inter", sans-serif;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    min-width: 350px;
+    max-width: 350px;
+
+    a{
+        font-family: "Inter", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        color: #000;
+    }
+
+
+    .members{
+        span{
+
+        
+        display: flex;
+        gap: 5px;
+        align-items: center;}
+    }
+
+    .dates{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .end_date, .start_date{
+        display: flex;
+        gap: 10px;
+    }
+   
+}
+
+.create_button{
+    button{
+        padding: 9px;
+        color: #fff;
+        font-family: "Inter", sans-serif;
+        background-color: #4040FB;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    button:hover{
+        transition: 0.3s;
+        background-color: #292999;
+    }
+}
+
+.create_project_form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin: 15px 0;
+    input{
+        padding: 10px;
+    }
+    textarea{
+        padding: 10px;
+        min-height: 100px;
+    }
+
+    input,textarea{
+        font-family: "Inter", sans-serif;
+    }
+    button{
+        padding: 8px;
+        border: none;
+        color: #fff;
+        font-family: "Inter", sans-serif;
+        background-color: #000;
+        cursor: pointer;
+    }
+
+    button:hover{
+        transition: 0.3s;
+        background-color: #2f2f37;
+    }
+}
+
+.datePickers{
+    display: flex;
+    justify-content: space-around;
+}
+
+.trash{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #f00;
+    cursor: pointer;
+}
+
+.pencil{
+    position: absolute;
+    top: 10px;
+    right: 35px;
+    cursor: pointer;
+}

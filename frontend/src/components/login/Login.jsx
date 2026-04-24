@@ -67,7 +67,7 @@ const [error, SetError] = useState("");
     console.log(data);
 
     localStorage.setItem("token", data.token);
-    window.location.href = "http://localhost:5173/kpis"
+    window.location.href = "http://localhost:5173/dashboard"
     }
 
   }
