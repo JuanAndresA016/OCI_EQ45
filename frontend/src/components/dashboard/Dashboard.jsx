@@ -66,10 +66,8 @@ export default function Dashboard() {
 
             console.log("Proyecto creado:", nuevoProyecto);
 
-            // 🔥 agregar sin recargar
             setDataObj(nuevoProyecto);
 
-            // 🔥 actualizar lista sin recargar
             
 
             setEditMode(false);
@@ -234,7 +232,6 @@ export default function Dashboard() {
 
                 const data2 = await projRes2.json();
 
-                // 🔥 evitar null
                 setDataObj2(Array.isArray(data2) ? data2 : []);
             } catch (err) {
                 console.error(err);
@@ -386,7 +383,7 @@ export default function Dashboard() {
 
                                         <div className="members">
                                             <span>
-                                                <i className="fa-regular fa-user"></i> {item.miembros + 1} miembros
+                                                <i className="fa-regular fa-user"></i> {item.miembros } miembros
                                             </span>
                                         </div>
 

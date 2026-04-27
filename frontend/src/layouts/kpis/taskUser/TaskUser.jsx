@@ -1,34 +1,8 @@
-
 import * as React from 'react';
 import { Box, Stack, Typography, Avatar } from '@mui/material';
 import "./TaskUser.css"
-import { useState, useEffect } from 'react';
-import { OrbitProgress } from "react-loading-indicators";
-
 
 export default function TaskUser() {
-
-    const [dataArray, setDataArray] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-
-
-    async function fetchData(url) {
-        fetch(url, {
-            method: "GET",
-        })
-        .then(res => res.json())
-        .then(data => {
-            const dataWithInitials = data.map(item => ({
-                ...item,
-                initials: getInitials(item.name)
-
-
-            }));
-
-            setDataArray(dataWithInitials);
-            setIsLoading(false);
-        });
-    }
 
     const getInitials = (name) => {
         if (!name) return "";
@@ -42,9 +16,16 @@ export default function TaskUser() {
         return (words[0][0] + words[words.length - 1][0]).toUpperCase();
     };
 
-    useEffect(() => {
-        fetchData("http://localhost:8080/api/tareas/por-persona");
-    }, []);
+    // 🔹 Datos hardcodeados
+    const dataArray = [
+        { name: "Juan Pérez", value: 5 },
+        { name: "María López", value: 8 },
+        { name: "Carlos Sánchez", value: 3 },
+        { name: "Ana Torres", value: 10 },
+    ].map(item => ({
+        ...item,
+        initials: getInitials(item.name)
+    }));
 
     const maxValue = Math.max(...dataArray.map(d => d.value), 1);
 
@@ -54,8 +35,6 @@ export default function TaskUser() {
                 <span style={{ display: "block", textAlign: "center" }}>
                     Productividad del equipo
                 </span>
-
-                {isLoading ? <OrbitProgress color="#4040FB" size="medium" text="" textColor="" /> : 
 
                 <Box
                     sx={{
@@ -111,7 +90,6 @@ export default function TaskUser() {
                         ))}
                     </Stack>
                 </Box>
-}
             </div>
         </div>
     );

@@ -11,7 +11,7 @@ export default function Aside(){
                 <div className="aside_container_element">
 
                     <div className="aside_container_element_logo">
-                        <img src="./logo.png" alt="" />
+                        <img src="/logo.png" alt="" />
 
                         <div className="aside_container_element_logo_text">
                             <p>MazeTask</p>
@@ -21,9 +21,9 @@ export default function Aside(){
 
                     <div className="aside_container_element_options">
                         <nav className="aside_container_element_options_nav">
-                            <a href=""><i class="fa-regular fa-folder"></i>Proyectos</a>
+                            <a href="/dashboard"><i class="fa-regular fa-folder"></i>Proyectos</a>
                             <a href=""><i class="fa-solid fa-users"></i>Equipos</a>
-                            <a href=""><i class="fa-solid fa-arrow-trend-up"></i>KPIs</a>
+                            <a href="/kpis"><i class="fa-solid fa-arrow-trend-up"></i>KPIs</a>
                         </nav>
                     </div>
                 </div>
@@ -31,7 +31,7 @@ export default function Aside(){
                 <div className="aside_container_element">
 
                     <div className="aside_container_element_container">
-                        <img src="./user2.png" alt="" />
+                        <img src="/user2.png" alt="" />
 
                         <div className="aside_container_element_container_user">
                             <p>Manager</p>
