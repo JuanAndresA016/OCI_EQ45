@@ -124,6 +124,13 @@
         <version>0.11.5</version>
         <scope>runtime</scope>
     </dependency>
+
+	<!-- Telegrambots-->
+	<dependency>
+		<groupId>org.telegram</groupId>
+		<artifactId>telegrambots-spring-boot-starter</artifactId>
+		<version>6.5.0</version>
+	</dependency>
 	</dependencies>
 
 	<build>
@@ -131,6 +138,9 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>com.oci45.mazetasks.MazetasksApplication</mainClass>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
