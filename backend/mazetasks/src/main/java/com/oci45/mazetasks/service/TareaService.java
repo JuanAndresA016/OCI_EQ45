@@ -42,4 +42,23 @@ public class TareaService {
     public void eliminar(Long id) {
         repo.deleteById(id);
     }
+
+    public List<Tarea> obtenerTareas(Long proyectoId, Long creadorId, Long padreId) {
+    return repo.findTareasByProyectoAndCreadorAndPadre(
+        proyectoId, creadorId, padreId
+    );
+}
+
+public Tarea obtenerPorId(Long id) {
+    return repo.findById(id)
+            .orElseThrow(() -> new RuntimeException("Tarea no encontrada"));
+}
+
+public List<Tarea> obtenerTareasConPadre(Long proyectoId, Long personaId, Long padreId) {
+    return repo.findTareasByProyectoPersonaAndPadre(proyectoId, personaId, padreId);
+}
+
+public List<Tarea> obtenerTareasPadre(Long proyectoId, Long personaId) {
+    return repo.findTareasPadre(proyectoId, personaId);
+}
 }

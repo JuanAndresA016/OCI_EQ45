@@ -1,5 +1,6 @@
 package com.oci45.mazetasks.controller;
 
+import com.oci45.mazetasks.model.Tarea;
 import com.oci45.mazetasks.model.TareaRol;
 import com.oci45.mazetasks.service.TareaRolService;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +26,8 @@ public class TareaRolController {
     public void asignar(@RequestBody TareaRol tr) {
         service.asignar(tr.getTareaId(), tr.getRolId());
     }
+
+
 
     @DeleteMapping
     public void eliminar(

@@ -656,20 +656,20 @@ export default function Proyecto() {
                                 {porHacer.map(task => (
                                     <div className="task_card" key={task.id}>
                                         <div className="actions_card">
-                                        <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
 
                                             <div>
-<i
-                                                className="fa-solid fa-trash task_delete"
-                                                onClick={() => handleDeleteTask(task.id)}
-                                            ></i>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
 
-                                            <i
-                                                className="fa-solid fa-pen task_edit"
-                                                onClick={() => openEditTask(task)}
-                                            ></i>
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
                                             </div>
-                                            
+
 
 
                                         </div>
@@ -693,19 +693,25 @@ export default function Proyecto() {
                                 {doing.map(task => (
                                     <div className="task_card" key={task.id}>
                                         <div className="actions_card">
-                                            <i
-                                                className="fa-solid fa-trash task_delete"
-                                                onClick={() => handleDeleteTask(task.id)}
-                                            ></i>
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
 
-                                            <i
-                                                className="fa-solid fa-pen task_edit"
-                                                onClick={() => openEditTask(task)}
-                                            ></i>
+                                            <div>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
+
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
+                                            </div>
+
+
+
                                         </div>
-                                        <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
                                         <div>
-                                            <span className="priority media">Media</span>
+                                            <span className="priority media">en progreso</span>
 
                                         </div>
 
@@ -724,19 +730,25 @@ export default function Proyecto() {
                                 {done.map(task => (
                                     <div className="task_card" key={task.id}>
                                         <div className="actions_card">
-                                            <i
-                                                className="fa-solid fa-trash task_delete"
-                                                onClick={() => handleDeleteTask(task.id)}
-                                            ></i>
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
 
-                                            <i
-                                                className="fa-solid fa-pen task_edit"
-                                                onClick={() => openEditTask(task)}
-                                            ></i>
+                                            <div>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
+
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
+                                            </div>
+
+
+
                                         </div>
-                                        <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
-                                        <div>
-                                            <span className="priority baja">Baja</span>
+                                       <div>
+                                            <span className="priority baja">Completa</span>
 
                                         </div>
 
@@ -754,20 +766,25 @@ export default function Proyecto() {
 
                                 {late.map(task => (
                                     <div className="task_card" key={task.id}>
-                                        <div className="actions_card">
-                                            <i
-                                                className="fa-solid fa-trash task_delete"
-                                                onClick={() => handleDeleteTask(task.id)}
-                                            ></i>
+                                       <div className="actions_card">
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
 
-                                            <i
-                                                className="fa-solid fa-pen task_edit"
-                                                onClick={() => openEditTask(task)}
-                                            ></i>
-                                        </div>
-                                        <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
-                                        <div>
-                                            <span className="priority alta">Alta</span>
+                                            <div>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
+
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
+                                            </div>
+
+
+
+                                        </div><div>
+                                            <span className="priority alta">Vencida</span>
 
                                         </div>
 
