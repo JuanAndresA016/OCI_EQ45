@@ -12,7 +12,6 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 
 @Service
-@PropertySource("classpath:TelegramCredentials.gitignore")
 public class TelegramBoot extends TelegramLongPollingBot {
 
     @Value("${telegram.bot.username}")
