@@ -158,10 +158,8 @@ export default function Dashboard() {
 
             console.log("Proyecto creado:", nuevoProyecto);
 
-            // 🔥 agregar sin recargar
             setDataObj(nuevoProyecto);
 
-            // limpiar formulario
             setNombre("");
             setDescripcion("");
             setFechaInicio(null);
@@ -174,7 +172,6 @@ export default function Dashboard() {
         }
     };
 
-    //  Estado por fechas
     const getEstado = (inicio, fin) => {
         if (!inicio || !fin) return "Sin fecha";
 
@@ -210,7 +207,6 @@ export default function Dashboard() {
                 const userData = await userRes.json();
                 setUser(userData);
 
-                // Proyectos
                 const projRes = await fetch(
                     `http://localhost:8080/api/proyectos/creador/${userData.id}`
                 );
@@ -219,11 +215,9 @@ export default function Dashboard() {
                 const data = await projRes.json();
                 console.log(data)
 
-                // 🔥 evitar null
                 setDataObj(Array.isArray(data) ? data : []);
 
 
-                //Proyectos de los que formas parte
 
                 const projRes2 = await fetch(
                     `http://localhost:8080/api/proyectos/miembro/${userData.id}`
@@ -411,7 +405,7 @@ export default function Dashboard() {
                                 proyectos2.map((item) => (
                                     <div className="content_projects_myproyects_element" key={item.id}>
 
-                                        <a href={`/proyecto/${item.id}`}>
+                                        <a href={`/proyecto_miembro/${item.id}`}>
                                             Portal proyecto {item.nombre} <i className="fa-solid fa-angle-right"></i>
                                         </a>
 

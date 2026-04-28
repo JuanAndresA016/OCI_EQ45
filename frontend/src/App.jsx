@@ -4,6 +4,9 @@ import Login from "./components/login/Login";
 import Register from "./components/register/Register";
 import Dashboard from "./components/dashboard/Dashboard";
 import Proyecto from "./components/proyecto/Proyecto";
+import TareaHija from "./components/tareaHija/TareaHija";
+import ProyectoMember from "./components/proyectoMember/proyectoMember";
+import ProyectoMemberHijo from "./components/proyectoMemberHijo/proyectoMemberHijo";
 
 export default function App() {
   return (
@@ -14,6 +17,9 @@ export default function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/proyecto/:proyecto_id" element={<Proyecto />} />
+        <Route path="/proyecto/:proyecto_id/tarea/:tarea_id" element={<TareaHija />} />
+        <Route path="/proyecto_miembro/:proyecto_id" element={<ProyectoMember />}/>
+        <Route path="/proyecto_miembro/:proyecto_id/tarea/:tarea_id" element={<ProyectoMemberHijo />}/>
       </Routes>
     </BrowserRouter>
   );

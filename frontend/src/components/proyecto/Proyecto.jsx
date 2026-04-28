@@ -16,6 +16,181 @@ export default function Proyecto() {
     const [roleName, setRoleName] = useState("");
     const [personaRoles, setPersonaRoles] = useState([]);
     const [selectedRoles, setSelectedRoles] = useState({});
+    const [tareas, setTareas] = useState([]);
+    const [showTaskForm, setShowTaskForm] = useState(false);
+    const [editingTask, setEditingTask] = useState(null);
+
+
+    const openEditTask = (task) => {
+        setEditingTask(task);
+    };
+
+    const handleUpdateTask = async () => {
+
+        if (
+            !editingTask.titulo ||
+            !editingTask.descripcion ||
+            !editingTask.fechaInicio ||
+            !editingTask.fechaFin
+        ) {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await fetch(
+                `http://localhost:8080/api/tareas/${editingTask.id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    },
+                    body: JSON.stringify(editingTask)
+                }
+            );
+
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error(text);
+            }
+
+            // refrescar
+            const updated = await fetch(
+                `http://localhost:8080/api/tareas?proyectoId=${proyecto_id}&creadorId=${user.id}`
+            );
+
+            const data = await updated.json();
+            setTasks(Array.isArray(data) ? data : []);
+
+            setEditingTask(null);
+
+        } catch (err) {
+            console.error(err);
+            alert("Error actualizando tarea");
+        }
+    };
+
+    const handleDeleteTask = async (taskId) => {
+        const confirmDelete = window.confirm("¿Eliminar esta tarea?");
+        if (!confirmDelete) return;
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await fetch(
+                `http://localhost:8080/api/tareas/${taskId}`,
+                {
+                    method: "DELETE",
+                    headers: {
+                        "Authorization": "Bearer " + token
+                    }
+                }
+            );
+
+            if (!res.ok) throw new Error();
+
+            // refrescar lista
+            setTasks(prev => prev.filter(t => t.id !== taskId));
+
+        } catch (err) {
+            console.error(err);
+            alert("Error eliminando tarea");
+        }
+    };
+
+    const [taskForm, setTaskForm] = useState({
+        titulo: "",
+        descripcion: "",
+        estado: "PENDIENTE",
+        tipoMedicion: "HORAS",
+        horasTrabajadas: "",
+        fechaInicio: "",
+        fechaFin: ""
+    });
+
+    const [tasks, setTasks] = useState([]);
+
+    const total = tasks.length;
+
+    const completadas = tasks.filter(t => t.estado === "COMPLETADA").length;
+
+    const enProgreso = tasks.filter(t => t.estado === "EN_PROGRESO").length;
+
+    const vencidas = tasks.filter(t => {
+        if (!t.fechaFin) return false;
+        return new Date(t.fechaFin) < new Date() && t.estado !== "COMPLETADA";
+    }).length;
+
+    const porHacer = tasks.filter(t => t.estado === "PENDIENTE");
+    const doing = tasks.filter(t => t.estado === "EN_PROGRESO");
+    const done = tasks.filter(t => t.estado === "COMPLETADA");
+    const late = tasks.filter(t => {
+        if (!t.fechaFin) return false;
+        return new Date(t.fechaFin) < new Date() && t.estado !== "COMPLETADA";
+    });
+
+    const handleCreateTask = async () => {
+
+        // 🔴 VALIDACIÓN
+        if (
+            !taskForm.titulo ||
+            !taskForm.descripcion ||
+            !taskForm.fechaInicio ||
+            !taskForm.fechaFin ||
+            !taskForm.horasTrabajadas
+        ) {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
+
+        try {
+            const token = localStorage.getItem("token");
+
+            const res = await fetch("http://localhost:8080/api/tareas", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify({
+                    ...taskForm,
+                    proyectoId: proyecto_id
+                })
+            });
+
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error(text);
+            }
+
+            // 🔥 refrescar tareas
+            const updated = await fetch(
+                `http://localhost:8080/api/tareas?proyectoId=${proyecto_id}&creadorId=${user.id}`
+            );
+
+            const data = await updated.json();
+            setTasks(Array.isArray(data) ? data : []);
+
+            // reset
+            setShowTaskForm(false);
+            setTaskForm({
+                titulo: "",
+                descripcion: "",
+                estado: "PENDIENTE",
+                tipoMedicion: "HORAS",
+                horasTrabajadas: "",
+                fechaInicio: "",
+                fechaFin: ""
+            });
+
+        } catch (err) {
+            console.error(err);
+            alert("Error creando tarea");
+        }
+    };
 
     const fetchPersonaRoles = async () => {
         const res = await fetch(
@@ -276,6 +451,13 @@ export default function Proyecto() {
                 const personaRolesData = await resPersonaRoles.json();
                 setPersonaRoles(Array.isArray(personaRolesData) ? personaRolesData : []);
 
+                const resTasks = await fetch(
+                    `http://localhost:8080/api/tareas?proyectoId=${proyecto_id}&creadorId=${userData.id}`
+                );
+
+                const tasksData = await resTasks.json();
+                setTasks(Array.isArray(tasksData) ? tasksData : []);
+
             } catch (err) {
                 console.error(err);
                 setMembers([]);
@@ -284,6 +466,8 @@ export default function Proyecto() {
             }
 
             console.log("personaRoles:", personaRoles);
+
+
         };
 
         init();
@@ -310,6 +494,309 @@ export default function Proyecto() {
 
                     <div className="dashboard_container_content">
                         <h1>Mi portal</h1>
+                        <div>
+                            <button
+                                className="btn_create_task"
+                                onClick={() => setShowTaskForm(true)}
+                            >
+                                + Crear tarea
+                            </button>
+                            {editingTask && (
+                                <div className="modal">
+
+                                    <div className="modal_content">
+
+                                        <h3>Editar tarea</h3>
+
+                                        <input
+                                            value={editingTask.titulo}
+                                            onChange={(e) =>
+                                                setEditingTask({ ...editingTask, titulo: e.target.value })
+                                            }
+                                        />
+
+                                        <textarea
+                                            value={editingTask.descripcion}
+                                            onChange={(e) =>
+                                                setEditingTask({ ...editingTask, descripcion: e.target.value })
+                                            }
+                                        />
+
+                                        <select
+                                            value={editingTask.estado}
+                                            onChange={(e) =>
+                                                setEditingTask({ ...editingTask, estado: e.target.value })
+                                            }
+                                        >
+                                            <option value="PENDIENTE">Por hacer</option>
+                                            <option value="EN_PROGRESO">En progreso</option>
+                                            <option value="COMPLETADA">Completada</option>
+                                        </select>
+
+                                        <input
+                                            type="date"
+                                            value={editingTask.fechaInicio}
+                                            onChange={(e) =>
+                                                setEditingTask({ ...editingTask, fechaInicio: e.target.value })
+                                            }
+                                        />
+
+                                        <input
+                                            type="date"
+                                            value={editingTask.fechaFin}
+                                            onChange={(e) =>
+                                                setEditingTask({ ...editingTask, fechaFin: e.target.value })
+                                            }
+                                        />
+
+                                        <div className="modal_buttons">
+                                            <button onClick={handleUpdateTask} className="agregar">
+                                                Guardar
+                                            </button>
+
+                                            <button onClick={() => setEditingTask(null)} className="cancelar">
+                                                Cancelar
+                                            </button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            )}
+                            {showTaskForm && (
+                                <div className="task_form">
+
+                                    <input
+                                        type="text"
+                                        placeholder="Título"
+                                        value={taskForm.titulo}
+                                        onChange={(e) => setTaskForm({ ...taskForm, titulo: e.target.value })}
+                                    />
+
+                                    <textarea
+                                        placeholder="Descripción"
+                                        value={taskForm.descripcion}
+                                        onChange={(e) => setTaskForm({ ...taskForm, descripcion: e.target.value })}
+                                    />
+
+                                    <select
+                                        value={taskForm.estado}
+                                        onChange={(e) => setTaskForm({ ...taskForm, estado: e.target.value })}
+                                    >
+                                        <option value="PENDIENTE">Por hacer</option>
+                                        <option value="EN_PROGRESO">En progreso</option>
+                                        <option value="COMPLETADA">Completada</option>
+                                    </select>
+
+                                    <input
+                                        type="number"
+                                        placeholder="Horas trabajadas"
+                                        value={taskForm.horasTrabajadas}
+                                        onChange={(e) => setTaskForm({ ...taskForm, horasTrabajadas: e.target.value })}
+                                    />
+
+                                    {/* 🔥 TU DATEPICKER */}
+                                    <input
+                                        type="date"
+                                        value={taskForm.fechaInicio}
+                                        onChange={(e) => setTaskForm({ ...taskForm, fechaInicio: e.target.value })}
+                                    />
+
+                                    <input
+                                        type="date"
+                                        value={taskForm.fechaFin}
+                                        onChange={(e) => setTaskForm({ ...taskForm, fechaFin: e.target.value })}
+                                    />
+
+                                    <div className="task_form_buttons">
+                                        <button onClick={handleCreateTask} className="agregar">
+                                            Guardar
+                                        </button>
+
+                                        <button onClick={() => setShowTaskForm(false)} className="cancelar">
+                                            Cancelar
+                                        </button>
+                                    </div>
+
+                                </div>
+                            )}
+                        </div>
+
+
+                        <div className="dashboard_cards">
+
+                            <div className="card">
+                                <h2>{total}</h2>
+                                <span>Total de Tareas</span>
+                            </div>
+
+                            <div className="card green">
+                                <h2>{completadas}</h2>
+                                <span>Completadas</span>
+                            </div>
+
+                            <div className="card yellow">
+                                <h2>{enProgreso}</h2>
+                                <span>En progreso</span>
+                            </div>
+
+                            <div className="card red">
+                                <h2>{vencidas}</h2>
+                                <span>Vencidas</span>
+                            </div>
+
+                        </div>
+
+
+                        <div className="kanban">
+
+                            {/* POR HACER */}
+                            <div className="column">
+                                <h3>Por hacer</h3>
+
+                                {porHacer.map(task => (
+                                    <div className="task_card" key={task.id}>
+                                        <div className="actions_card">
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
+
+                                            <div>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
+
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
+                                            </div>
+
+
+
+                                        </div>
+
+                                        <div>
+
+                                        </div>
+
+                                        <div className="task_info">
+                                            <span>{task.descripcion}</span>
+                                            <span> <i className="fas fa-calendar"></i> {task.fechaInicio} </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* EN PROGRESO */}
+                            <div className="column">
+                                <h3>En progreso</h3>
+
+                                {doing.map(task => (
+                                    <div className="task_card" key={task.id}>
+                                        <div className="actions_card">
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
+
+                                            <div>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
+
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div>
+                                            <span className="priority media">en progreso</span>
+
+                                        </div>
+
+                                        <div className="task_info">
+                                            <span>{task.descripcion}</span>
+                                            <span> <i className="fas fa-calendar"></i> {task.fechaInicio} </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* COMPLETADAS */}
+                            <div className="column">
+                                <h3>Completadas</h3>
+
+                                {done.map(task => (
+                                    <div className="task_card" key={task.id}>
+                                        <div className="actions_card">
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
+
+                                            <div>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
+
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
+                                            </div>
+
+
+
+                                        </div>
+                                       <div>
+                                            <span className="priority baja">Completa</span>
+
+                                        </div>
+
+                                        <div className="task_info">
+                                            <span>{task.descripcion}</span>
+                                            <span> <i className="fas fa-calendar"></i> {task.fechaInicio} </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                            {/* VENCIDAS */}
+                            <div className="column">
+                                <h3>Vencidas</h3>
+
+                                {late.map(task => (
+                                    <div className="task_card" key={task.id}>
+                                       <div className="actions_card">
+                                            <a href={`/proyecto/${proyecto_id}/tarea/${task.id}`} className="task_title">{task.titulo}</a>
+
+                                            <div>
+                                                <i
+                                                    className="fa-solid fa-trash task_delete"
+                                                    onClick={() => handleDeleteTask(task.id)}
+                                                ></i>
+
+                                                <i
+                                                    className="fa-solid fa-pen task_edit"
+                                                    onClick={() => openEditTask(task)}
+                                                ></i>
+                                            </div>
+
+
+
+                                        </div><div>
+                                            <span className="priority alta">Vencida</span>
+
+                                        </div>
+
+                                        <div className="task_info">
+                                            <span>{task.descripcion}</span>
+                                            <span> <i className="fas fa-calendar"></i> {task.fechaInicio} </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+
+                        </div>
 
                         <div className="dashboard_container_content_personas">
                             <span>Personas miembros del equipo:</span>
@@ -356,49 +843,49 @@ export default function Proyecto() {
                                                 onClick={() => handleDeleteMember(member.id)}
                                             ></i>
 
-                                            
+
                                         </div>
 
                                         <div className="roles_asignacion">
 
-                                                <select
-                                                    onChange={(e) => {
-                                                        const rolId = e.target.value;
-                                                        if (rolId) assignRole(member.id, rolId);
-                                                    }}
-                                                    defaultValue=""
-                                                >
-                                                    <option value="" disabled>Asignar rol</option>
+                                            <select
+                                                onChange={(e) => {
+                                                    const rolId = e.target.value;
+                                                    if (rolId) assignRole(member.id, rolId);
+                                                }}
+                                                defaultValue=""
+                                            >
+                                                <option value="" disabled>Asignar rol</option>
 
-                                                    {roles.map(role => (
-                                                        <option key={role.id} value={role.id}>
-                                                            {role.nombre}
-                                                        </option>
-                                                    ))}
-                                                </select>
+                                                {roles.map(role => (
+                                                    <option key={role.id} value={role.id}>
+                                                        {role.nombre}
+                                                    </option>
+                                                ))}
+                                            </select>
 
-                                                <div className="roles_usuario">
+                                            <div className="roles_usuario">
 
-                                                    {personaRoles
-                                                        .filter(pr => pr.personaId === member.id)
-                                                        .map(pr => (
-                                                            <div key={pr.rolId} className="rol_item">
+                                                {personaRoles
+                                                    .filter(pr => pr.personaId === member.id)
+                                                    .map(pr => (
+                                                        <div key={pr.rolId} className="rol_item">
 
-                                                                <span>{pr.rolNombre}</span>
+                                                            <span>{pr.rolNombre}</span>
 
-                                                                <i
-                                                                    className="fa-solid fa-trash"
-                                                                    onClick={() => removeRole(member.id, pr.rolId)}
-                                                                    style={{ cursor: "pointer", marginLeft: "8px" }}
-                                                                ></i>
+                                                            <i
+                                                                className="fa-solid fa-trash"
+                                                                onClick={() => removeRole(member.id, pr.rolId)}
+                                                                style={{ cursor: "pointer", marginLeft: "8px" }}
+                                                            ></i>
 
-                                                            </div>
-                                                        ))
-                                                    }
-
-                                                </div>
+                                                        </div>
+                                                    ))
+                                                }
 
                                             </div>
+
+                                        </div>
                                     </div>
                                 ))
                             )}
@@ -457,11 +944,9 @@ export default function Proyecto() {
 
                             </div>
 
-                            <div className="roles_asignacion">
 
 
 
-                            </div>
                         </div>
                     </div>
                 </div>
