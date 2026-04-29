@@ -1,6 +1,7 @@
 import Aside from "../../layouts/aside/Aside";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./proyectoMemberHijo.css"
 
 export default function ProyectoMemberHijo() {
     const { proyecto_id, tarea_id } = useParams();
@@ -11,6 +12,8 @@ export default function ProyectoMemberHijo() {
     const [roles, setRoles] = useState([]);
     const [tareaInfo, setTareaInfo] = useState([]);
     const [rolesAsignados, setRolesAsignados] = useState([]);
+    const [aiSuggestion, setAiSuggestion] = useState("");
+const [loadingAI, setLoadingAI] = useState(false);
 
     const [taskForm, setTaskForm] = useState({
         titulo: "",
@@ -32,6 +35,32 @@ export default function ProyectoMemberHijo() {
         setRoles(Array.isArray(data) ? data : []);
     };
 
+
+    const getAISuggestion = async () => {
+    try {
+        setLoadingAI(true);
+
+        const res = await fetch("http://localhost:8080/api/ai/sugerencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                titulo: tareaInfo.titulo,
+                descripcion: tareaInfo.descripcion
+            })
+        });
+
+        const data = await res.text();
+
+        setAiSuggestion(data);
+
+    } catch (err) {
+        console.error(err);
+    } finally {
+        setLoadingAI(false);
+    }
+};
     const fetchRolesByTask = async () => {
         try {
             const token = localStorage.getItem("token");
@@ -234,7 +263,7 @@ export default function ProyectoMemberHijo() {
 
             // refrescar
             const updated = await fetch(
-                `http://localhost:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${userData.id}&padreId=${tarea_id}`
+                `http://localhost:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
             );
 
             const data = await updated.json();
@@ -369,7 +398,7 @@ export default function ProyectoMemberHijo() {
 
                             <h3>Roles de la tarea</h3>
 
-                            {rolesAsignados.length == 0 ? <span className="role_tag">Rol del padre</span> : rolesAsignados.map(r => {
+                            {rolesAsignados.length == 0 ? <span className="role_tag">ninguno/heredado</span> : rolesAsignados.map(r => {
                                 const rol = roles.find(ro => ro.id === r.rolId);
 
                                 return (
@@ -704,9 +733,21 @@ export default function ProyectoMemberHijo() {
                         </div>
                     </div>
 
-                </div>
+<button className="btn_ai" onClick={getAISuggestion}>
+    <i class="fa-solid fa-wand-magic-sparkles"></i> Sugerencia de la IA cómo empezar
+</button>
 
-            </div>
+{loadingAI && <p>Generando sugerencia...</p>}
+
+{aiSuggestion && (
+    <div className="ai_box">
+        <h3>Recomendación IA</h3>
+        <pre>{aiSuggestion}</pre>
+    </div>
+)}
+        
+                </div>
+    </div>
         </div>
     </>)
 }
