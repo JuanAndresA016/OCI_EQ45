@@ -15,8 +15,8 @@ export default function KpisProyect() {
 const { proyectoId } = useParams();
     useEffect(() => {
         Promise.all([
-            fetch(`http://localhost:8080/api/tareas/horas-sprint?proyectoId=${proyectoId}`),
-            fetch(`http://localhost:8080/api/tareas/tareas-completadas?proyectoId=${proyectoId}`)
+            fetch(`http://140.84.180.142:8080/api/tareas/horas-sprint?proyectoId=${proyectoId}`),
+            fetch(`http://140.84.180.142:8080/api/tareas/tareas-completadas?proyectoId=${proyectoId}`)
         ])
             .then(async ([hRes, tRes]) => {
                 const horasData = await hRes.json();

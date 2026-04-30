@@ -45,7 +45,7 @@ export default function Dashboard() {
                 creadorId: user.id
             };
 
-            const response = await fetch(`http://localhost:8080/api/proyectos/${editId}`, {
+            const response = await fetch(`http://140.84.180.142:8080/api/proyectos/${editId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -59,7 +59,7 @@ export default function Dashboard() {
             }
 
              const nuevo = await fetch(
-                `http://localhost:8080/api/proyectos/creador/${user.id}`
+                `http://140.84.180.142:8080/api/proyectos/creador/${user.id}`
             );
 
             const nuevoProyecto = await nuevo.json();
@@ -92,7 +92,7 @@ export default function Dashboard() {
 
             if (!window.confirm("¿Seguro que quieres eliminar este proyecto?")) return;
 
-            const response = await fetch(`http://localhost:8080/api/proyectos/${id}`, {
+            const response = await fetch(`http://140.84.180.142:8080/api/proyectos/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": "Bearer " + token
@@ -135,7 +135,7 @@ export default function Dashboard() {
 
             console.log("Enviando:", payload);
 
-            const response = await fetch("http://localhost:8080/api/proyectos", {
+            const response = await fetch("http://140.84.180.142:8080/api/proyectos", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -151,7 +151,7 @@ export default function Dashboard() {
             }
 
             const nuevo = await fetch(
-                `http://localhost:8080/api/proyectos/creador/${user.id}`
+                `http://140.84.180.142:8080/api/proyectos/creador/${user.id}`
             );
 
             const nuevoProyecto = await nuevo.json();
@@ -196,7 +196,7 @@ export default function Dashboard() {
                 if (!token) return;
 
                 // Usuario
-                const userRes = await fetch("http://localhost:8080/auth/me", {
+                const userRes = await fetch("http://140.84.180.142:8080/auth/me", {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
@@ -208,7 +208,7 @@ export default function Dashboard() {
                 setUser(userData);
 
                 const projRes = await fetch(
-                    `http://localhost:8080/api/proyectos/creador/${userData.id}`
+                    `http://140.84.180.142:8080/api/proyectos/creador/${userData.id}`
                 );
 
 
@@ -220,7 +220,7 @@ export default function Dashboard() {
 
 
                 const projRes2 = await fetch(
-                    `http://localhost:8080/api/proyectos/miembro/${userData.id}`
+                    `http://140.84.180.142:8080/api/proyectos/miembro/${userData.id}`
                 );
 
 

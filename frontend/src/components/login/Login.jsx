@@ -7,7 +7,7 @@ export default function Login() {
 //     const getUser = async () => {
 //   const token = localStorage.getItem("token");
 
-//   const response = await fetch("http://localhost:8080/auth/me", {
+//   const response = await fetch("http://140.84.180.142:8080/auth/me", {
 //     method: "GET",
 //     headers: {
 //       "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const [error, SetError] = useState("");
     }else{
 
     
-    const response = await fetch("http://localhost:8080/auth/login", {
+    const response = await fetch("http://140.84.180.142:8080/auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

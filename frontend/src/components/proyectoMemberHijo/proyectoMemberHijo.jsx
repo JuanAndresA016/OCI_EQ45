@@ -28,7 +28,7 @@ const [loadingAI, setLoadingAI] = useState(false);
 
     const fetchRoles = async (userId) => {
         const res = await fetch(
-            `http://localhost:8080/api/roles/proyecto/${proyecto_id}`
+            `http://140.84.180.142:8080/api/roles/proyecto/${proyecto_id}`
         );
 
         const data = await res.json();
@@ -40,7 +40,7 @@ const [loadingAI, setLoadingAI] = useState(false);
     try {
         setLoadingAI(true);
 
-        const res = await fetch("http://localhost:8080/api/ai/sugerencia", {
+        const res = await fetch("http://140.84.180.142:8080/api/ai/sugerencia", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -66,7 +66,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tarea-rol/${tarea_id}`,
+                `http://140.84.180.142:8080/api/tarea-rol/${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -88,7 +88,7 @@ const [loadingAI, setLoadingAI] = useState(false);
         try {
             const token = localStorage.getItem("token");
 
-            await fetch("http://localhost:8080/api/tarea-rol", {
+            await fetch("http://140.84.180.142:8080/api/tarea-rol", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             await fetch(
-                `http://localhost:8080/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
+                `http://140.84.180.142:8080/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -145,7 +145,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tareas/${taskId}`,
+                `http://140.84.180.142:8080/api/tareas/${taskId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -184,7 +184,7 @@ const [loadingAI, setLoadingAI] = useState(false);
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://localhost:8080/api/tareas", {
+            const res = await fetch("http://140.84.180.142:8080/api/tareas", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -204,7 +204,7 @@ const [loadingAI, setLoadingAI] = useState(false);
 
             // 🔥 refrescar tareas
             const updated = await fetch(
-                `http://localhost:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
+                `http://140.84.180.142:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
             );
 
             const data = await updated.json();
@@ -245,7 +245,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tareas/${editingTask.id}`,
+                `http://140.84.180.142:8080/api/tareas/${editingTask.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -263,7 +263,7 @@ const [loadingAI, setLoadingAI] = useState(false);
 
             // refrescar
             const updated = await fetch(
-                `http://localhost:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
+                `http://140.84.180.142:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
             );
 
             const data = await updated.json();
@@ -282,7 +282,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
+                `http://140.84.180.142:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -307,7 +307,7 @@ const [loadingAI, setLoadingAI] = useState(false);
                 if (!token) return;
 
                 // Usuario
-                const userRes = await fetch("http://localhost:8080/auth/me", {
+                const userRes = await fetch("http://140.84.180.142:8080/auth/me", {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
@@ -322,7 +322,7 @@ const [loadingAI, setLoadingAI] = useState(false);
                     const token = localStorage.getItem("token");
 
                     const res = await fetch(
-                        `http://localhost:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${userData.id}&padreId=${tarea_id}`,
+                        `http://140.84.180.142:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${userData.id}&padreId=${tarea_id}`,
                         {
                             headers: {
                                 "Authorization": "Bearer " + token
@@ -338,7 +338,7 @@ const [loadingAI, setLoadingAI] = useState(false);
                     await fetchRoles(userData.id);
                     await fetchRolesByTask();
 
-                    const fetchTareaInfo = await fetch(`http://localhost:8080/api/tareas/${tarea_id}`)
+                    const fetchTareaInfo = await fetch(`http://140.84.180.142:8080/api/tareas/${tarea_id}`)
                     const resTareaInfo = await fetchTareaInfo.json()
                     setTareaInfo(resTareaInfo);
 

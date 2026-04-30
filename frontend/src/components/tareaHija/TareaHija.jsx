@@ -26,7 +26,7 @@ export default function TareaHija() {
 
     const fetchRoles = async (userId) => {
         const res = await fetch(
-            `http://localhost:8080/api/roles/proyecto/${proyecto_id}`
+            `http://140.84.180.142:8080/api/roles/proyecto/${proyecto_id}`
         );
 
         const data = await res.json();
@@ -38,7 +38,7 @@ export default function TareaHija() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tarea-rol/${tarea_id}`,
+                `http://140.84.180.142:8080/api/tarea-rol/${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -60,7 +60,7 @@ export default function TareaHija() {
         try {
             const token = localStorage.getItem("token");
 
-            await fetch("http://localhost:8080/api/tarea-rol", {
+            await fetch("http://140.84.180.142:8080/api/tarea-rol", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -84,7 +84,7 @@ export default function TareaHija() {
             const token = localStorage.getItem("token");
 
             await fetch(
-                `http://localhost:8080/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
+                `http://140.84.180.142:8080/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -117,7 +117,7 @@ export default function TareaHija() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tareas/${taskId}`,
+                `http://140.84.180.142:8080/api/tareas/${taskId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -156,7 +156,7 @@ export default function TareaHija() {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://localhost:8080/api/tareas", {
+            const res = await fetch("http://140.84.180.142:8080/api/tareas", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -176,7 +176,7 @@ export default function TareaHija() {
 
             // 🔥 refrescar tareas
             const updated = await fetch(
-                        `http://localhost:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
+                        `http://140.84.180.142:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
             );
 
             const data = await updated.json();
@@ -217,7 +217,7 @@ export default function TareaHija() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tareas/${editingTask.id}`,
+                `http://140.84.180.142:8080/api/tareas/${editingTask.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -235,7 +235,7 @@ export default function TareaHija() {
 
             // refrescar
             const updated = await fetch(
-                        `http://localhost:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
+                        `http://140.84.180.142:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
             );
 
             const data = await updated.json();
@@ -254,7 +254,7 @@ export default function TareaHija() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://localhost:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
+                `http://140.84.180.142:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -279,7 +279,7 @@ export default function TareaHija() {
                 if (!token) return;
 
                 // Usuario
-                const userRes = await fetch("http://localhost:8080/auth/me", {
+                const userRes = await fetch("http://140.84.180.142:8080/auth/me", {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
@@ -294,7 +294,7 @@ export default function TareaHija() {
                     const token = localStorage.getItem("token");
 
                     const res = await fetch(
-                        `http://localhost:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${userData.id}&padreId=${tarea_id}`,
+                        `http://140.84.180.142:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${userData.id}&padreId=${tarea_id}`,
                         {
                             headers: {
                                 "Authorization": "Bearer " + token
@@ -310,7 +310,7 @@ export default function TareaHija() {
                     await fetchRoles(userData.id);
                     await fetchRolesByTask();
 
-                    const fetchTareaInfo = await fetch(`http://localhost:8080/api/tareas/${tarea_id}`)
+                    const fetchTareaInfo = await fetch(`http://140.84.180.142:8080/api/tareas/${tarea_id}`)
                     const resTareaInfo = await fetchTareaInfo.json()
                     setTareaInfo(resTareaInfo);
 
