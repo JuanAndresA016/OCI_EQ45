@@ -235,7 +235,7 @@ export default function TareaHija() {
 
             // refrescar
             const updated = await fetch(
-                        `http://localhost:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${userData.id}&padreId=${tarea_id}`,
+                        `http://localhost:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
             );
 
             const data = await updated.json();

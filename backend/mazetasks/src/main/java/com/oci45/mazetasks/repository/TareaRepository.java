@@ -71,4 +71,45 @@ List<Tarea> findTareasPadre(
 );
 
 
+    @Query(value = """
+        SELECT
+            TS.TAREA_ID AS sprintId,
+            TS.TITULO AS sprintTitulo,
+            P.PERSONA_ID AS personaId,
+            P.NOMBRE AS nombre,
+            SUM(T.HORAS_TRABAJADAS) AS horas
+        FROM TAREAS T
+        JOIN TAREAS TS ON TS.TAREA_ID = COALESCE(T.PADRE_ID, T.TAREA_ID)
+        JOIN TAREASROLES TR ON TR.TAREA_ID = T.TAREA_ID
+        JOIN PERSONA_ROL PR ON TR.ROL_ID = PR.ROL_ID
+        JOIN PERSONAS P ON P.PERSONA_ID = PR.PERSONA_ID
+        WHERE T.PROYECTO_ID = :proyectoId
+          AND TS.PADRE_ID IS NULL
+        GROUP BY TS.TAREA_ID, TS.TITULO, P.PERSONA_ID, P.NOMBRE
+        ORDER BY TS.TAREA_ID, P.PERSONA_ID
+        """, nativeQuery = true)
+    List<Object[]> obtenerHorasPorSprint(@Param("proyectoId") Long proyectoId);
+
+
+    @Query(value = """
+        SELECT
+            TS.TAREA_ID AS sprintId,
+            TS.TITULO AS sprintTitulo,
+            P.PERSONA_ID AS personaId,
+            P.NOMBRE AS nombre,
+            COUNT(T.TAREA_ID) AS tareasCompletadas
+        FROM TAREAS T
+        JOIN TAREAS TS ON TS.TAREA_ID = COALESCE(T.PADRE_ID, T.TAREA_ID)
+        JOIN TAREASROLES TR ON TR.TAREA_ID = T.TAREA_ID
+        JOIN PERSONA_ROL PR ON TR.ROL_ID = PR.ROL_ID
+        JOIN PERSONAS P ON P.PERSONA_ID = PR.PERSONA_ID
+        WHERE T.PROYECTO_ID = :proyectoId
+          AND TS.PADRE_ID IS NULL
+          AND T.ESTADO = 'COMPLETADA'
+        GROUP BY TS.TAREA_ID, TS.TITULO, P.PERSONA_ID, P.NOMBRE
+        ORDER BY TS.TAREA_ID, P.PERSONA_ID
+        """, nativeQuery = true)
+    List<Object[]> obtenerTareasCompletadas(@Param("proyectoId") Long proyectoId);
+
+
 }

@@ -1,5 +1,7 @@
 package com.oci45.mazetasks.controller;
 
+import com.oci45.mazetasks.dto.HorasSprintUsuarioDTO;
+import com.oci45.mazetasks.dto.TareasCompletadasDTO;
 import com.oci45.mazetasks.model.Tarea;
 import com.oci45.mazetasks.service.TareaService;
 
@@ -21,16 +23,15 @@ public class TareaController {
     @GetMapping
     public List<Tarea> get(
             @RequestParam Long proyectoId,
-            @RequestParam Long creadorId
-    ) {
+            @RequestParam Long creadorId) {
         return service.getByProyecto(proyectoId, creadorId);
     }
 
     @GetMapping("/{id}")
-public ResponseEntity<Tarea> obtenerPorId(@PathVariable Long id) {
-    Tarea tarea = service.obtenerPorId(id);
-    return ResponseEntity.ok(tarea);
-}
+    public ResponseEntity<Tarea> obtenerPorId(@PathVariable Long id) {
+        Tarea tarea = service.obtenerPorId(id);
+        return ResponseEntity.ok(tarea);
+    }
 
     @PostMapping
     public Tarea crear(@RequestBody Tarea tarea) {
@@ -48,33 +49,40 @@ public ResponseEntity<Tarea> obtenerPorId(@PathVariable Long id) {
     }
 
     @GetMapping("/proyectos/{proyectoId}/tareas")
-public ResponseEntity<List<Tarea>> obtenerTareas(
-        @PathVariable Long proyectoId,
-        @RequestParam Long creadorId,
-        @RequestParam Long padreId
-) {
-    List<Tarea> tareas = service.obtenerTareas(proyectoId, creadorId, padreId);
-    return ResponseEntity.ok(tareas);
-}
+    public ResponseEntity<List<Tarea>> obtenerTareas(
+            @PathVariable Long proyectoId,
+            @RequestParam Long creadorId,
+            @RequestParam Long padreId) {
+        List<Tarea> tareas = service.obtenerTareas(proyectoId, creadorId, padreId);
+        return ResponseEntity.ok(tareas);
+    }
 
-@GetMapping("/filtradas")
-public ResponseEntity<List<Tarea>> obtenerConPadre(
-        @RequestParam Long proyectoId,
-        @RequestParam Long personaId,
-        @RequestParam Long padreId
-) {
-    return ResponseEntity.ok(
-        service.obtenerTareasConPadre(proyectoId, personaId, padreId)
-    );
-}
+    @GetMapping("/filtradas")
+    public ResponseEntity<List<Tarea>> obtenerConPadre(
+            @RequestParam Long proyectoId,
+            @RequestParam Long personaId,
+            @RequestParam Long padreId) {
+        return ResponseEntity.ok(
+                service.obtenerTareasConPadre(proyectoId, personaId, padreId));
+    }
 
-@GetMapping("/padre")
-public ResponseEntity<List<Tarea>> obtenerPadres(
-        @RequestParam Long proyectoId,
-        @RequestParam Long personaId
-) {
-    return ResponseEntity.ok(
-        service.obtenerTareasPadre(proyectoId, personaId)
-    );
-}
+    @GetMapping("/padre")
+    public ResponseEntity<List<Tarea>> obtenerPadres(
+            @RequestParam Long proyectoId,
+            @RequestParam Long personaId) {
+        return ResponseEntity.ok(
+                service.obtenerTareasPadre(proyectoId, personaId));
+    }
+
+    @GetMapping("/horas-sprint")
+    public List<HorasSprintUsuarioDTO> horasPorSprint(
+            @RequestParam Long proyectoId) {
+        return service.getHorasPorSprint(proyectoId);
+    }
+
+    @GetMapping("/tareas-completadas")
+    public List<TareasCompletadasDTO> tareasCompletadas(
+            @RequestParam Long proyectoId) {
+        return service.getTareasCompletadas(proyectoId);
+    }
 }

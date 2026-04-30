@@ -7,6 +7,7 @@ import Proyecto from "./components/proyecto/Proyecto";
 import TareaHija from "./components/tareaHija/TareaHija";
 import ProyectoMember from "./components/proyectoMember/proyectoMember";
 import ProyectoMemberHijo from "./components/proyectoMemberHijo/proyectoMemberHijo";
+import KpisProyect from "./components/kpisProject/KpisProyect";
 
 export default function App() {
   return (
@@ -20,6 +21,7 @@ export default function App() {
         <Route path="/proyecto/:proyecto_id/tarea/:tarea_id" element={<TareaHija />} />
         <Route path="/proyecto_miembro/:proyecto_id" element={<ProyectoMember />}/>
         <Route path="/proyecto_miembro/:proyecto_id/tarea/:tarea_id" element={<ProyectoMemberHijo />}/>
+        <Route path="/proyecto-kpi/:proyectoId" element={<KpisProyect />}/>
       </Routes>
     </BrowserRouter>
   );

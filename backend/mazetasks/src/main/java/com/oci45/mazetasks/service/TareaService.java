@@ -1,5 +1,7 @@
 package com.oci45.mazetasks.service;
 
+import com.oci45.mazetasks.dto.HorasSprintUsuarioDTO;
+import com.oci45.mazetasks.dto.TareasCompletadasDTO;
 import com.oci45.mazetasks.model.Tarea;
 import com.oci45.mazetasks.repository.TareaRepository;
 import org.springframework.stereotype.Service;
@@ -44,21 +46,44 @@ public class TareaService {
     }
 
     public List<Tarea> obtenerTareas(Long proyectoId, Long creadorId, Long padreId) {
-    return repo.findTareasByProyectoAndCreadorAndPadre(
-        proyectoId, creadorId, padreId
-    );
-}
+        return repo.findTareasByProyectoAndCreadorAndPadre(
+                proyectoId, creadorId, padreId);
+    }
 
-public Tarea obtenerPorId(Long id) {
-    return repo.findById(id)
-            .orElseThrow(() -> new RuntimeException("Tarea no encontrada"));
-}
+    public Tarea obtenerPorId(Long id) {
+        return repo.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tarea no encontrada"));
+    }
 
-public List<Tarea> obtenerTareasConPadre(Long proyectoId, Long personaId, Long padreId) {
-    return repo.findTareasByProyectoPersonaAndPadre(proyectoId, personaId, padreId);
-}
+    public List<Tarea> obtenerTareasConPadre(Long proyectoId, Long personaId, Long padreId) {
+        return repo.findTareasByProyectoPersonaAndPadre(proyectoId, personaId, padreId);
+    }
 
-public List<Tarea> obtenerTareasPadre(Long proyectoId, Long personaId) {
-    return repo.findTareasPadre(proyectoId, personaId);
-}
+    public List<Tarea> obtenerTareasPadre(Long proyectoId, Long personaId) {
+        return repo.findTareasPadre(proyectoId, personaId);
+    }
+
+    public List<HorasSprintUsuarioDTO> getHorasPorSprint(Long proyectoId) {
+        return repo.obtenerHorasPorSprint(proyectoId)
+                .stream()
+                .map(r -> new HorasSprintUsuarioDTO(
+                        ((Number) r[0]).longValue(),
+                        (String) r[1],
+                        ((Number) r[2]).longValue(),
+                        (String) r[3],
+                        r[4] != null ? ((Number) r[4]).doubleValue() : 0.0))
+                .toList();
+    }
+
+    public List<TareasCompletadasDTO> getTareasCompletadas(Long proyectoId) {
+        return repo.obtenerTareasCompletadas(proyectoId)
+                .stream()
+                .map(r -> new TareasCompletadasDTO(
+                        ((Number) r[0]).longValue(),
+                        (String) r[1],
+                        ((Number) r[2]).longValue(),
+                        (String) r[3],
+                        ((Number) r[4]).longValue()))
+                .toList();
+    }
 }
