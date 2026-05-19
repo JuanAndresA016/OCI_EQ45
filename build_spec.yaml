@@ -1,0 +1,37 @@
+version: 0.1
+component: build
+timeoutInSeconds: 1200
+shell: bash
+
+env:
+  variables:
+    JAVA_HOME: /usr/lib64/graalvm/graalvm-java22
+
+steps:
+  - type: Command
+    name: "Install GraalVM Enterprise 22.x Native Image for Java22"
+    command: |
+      yum -y install graalvm-22-jdk.x86_64
+      ls /usr/lib64/graalvm/
+
+  - type: Command
+    name: "Set PATH Variable"
+    command: |
+      export PATH=$JAVA_HOME/bin:$PATH
+      java -version
+      mvn -version
+
+  - type: Command
+    name: "Build Backend"
+    command: |
+      cd backend/mazetasks
+      chmod +x mvnw
+      chmod +x build.sh
+      ./build.sh
+
+  - type: Command
+    name: "Build Frontend"
+    command: |
+      cd frontend
+      npm install
+      npm run build
