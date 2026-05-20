@@ -2,12 +2,10 @@ version: 0.1
 component: build
 timeoutInSeconds: 1200
 shell: bash
-
 env:
   variables:
     JAVA_HOME: /usr/lib64/graalvm/graalvm-java22
     DOCKER_REGISTRY: mx-queretaro-1.ocir.io/axai6dvt88i7
-
 steps:
   - type: Command
     name: "Install GraalVM Enterprise 22.x Native Image for Java22"
@@ -23,8 +21,17 @@ steps:
       mvn -version
 
   - type: Command
+    name: "Docker Login"
+    command: |
+      echo 'CNa[]e+IBJ>7w8.#vu2U' | docker login mx-queretaro-1.ocir.io \
+        --username axai6dvt88i7/a01644650@tec.mx \
+        --password-stdin
+
+  - type: Command
     name: "Build Backend"
     command: |
+      export PATH=$JAVA_HOME/bin:$PATH
+      export DOCKER_REGISTRY=mx-queretaro-1.ocir.io/axai6dvt88i7
       cd backend/mazetasks
       chmod +x mvnw
       chmod +x build.sh
