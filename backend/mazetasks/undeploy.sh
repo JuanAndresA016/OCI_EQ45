@@ -1,0 +1,3 @@
+echo delete backend deployment and service...
+kubectl -n mtdrworkshop delete deployment mazetasks-backend --ignore-not-found=true
+kubectl -n mtdrworkshop delete service mazetasks-backend-service --ignore-not-found=true

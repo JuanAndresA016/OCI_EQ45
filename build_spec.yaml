@@ -23,9 +23,33 @@ steps:
   - type: Command
     name: "Docker Login"
     command: |
-      echo 'CNa[]e+IBJ>7w8.#vu2U' | docker login mx-queretaro-1.ocir.io \
+      docker login mx-queretaro-1.ocir.io \
         --username axai6dvt88i7/a01644650@tec.mx \
-        --password-stdin
+        --password 'CNa[]e+IBJ>7w8.#vu2U'
+
+  - type: Command
+    name: "Install K8s"
+    command: |
+      mkdir -p $HOME/.kube
+      mkdir -p $HOME/k8s
+      cd $HOME/k8s
+      wget https://dl.k8s.io/v1.31.2/bin/linux/amd64/kubectl
+      chmod +x kubectl
+      export PATH=$PATH:$HOME/k8s
+      kubectl version --client
+      cd $HOME/.kube
+      oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.mx-queretaro-1.aaaaaaaaiceqv7wm23gple5jlftfkh5l6tydwjpkwk7wyt37xc7zrlpnijlq --file $HOME/.kube/config --region mx-queretaro-1 --token-version 2.0.0 --kube-endpoint PUBLIC_ENDPOINT
+      export KUBECONFIG=$HOME/.kube/config
+
+  - type: Command
+    name: "Undeploy"
+    ignoreFailure: True
+    command: |
+      export PATH=$PATH:$HOME/k8s
+      export KUBECONFIG=$HOME/.kube/config
+      cd backend/mazetasks
+      chmod +x undeploy.sh
+      source undeploy.sh
 
   - type: Command
     name: "Build Backend"
