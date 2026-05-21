@@ -1,4 +1,3 @@
 # OCI_EQ45
 
-
-Cambio
+Proyecto Equipo 45
