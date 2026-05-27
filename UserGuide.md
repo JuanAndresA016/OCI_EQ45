@@ -88,7 +88,6 @@ En caso de querer trabajar en una nueva clickear en crear tarea.
 - Registro de usuarios
 - Inicio de sesión
 - Gestión de sesiones
-- 
 
 ## Funciones de Gestión de Proyectos
 - Crear proyectos
