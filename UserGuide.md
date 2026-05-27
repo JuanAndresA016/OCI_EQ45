@@ -72,7 +72,7 @@ Descargar la última versión de Telegram.
 
 Abrir Telegram y buscar el bot ya configurado.
 
-## Paso 3 — Aceeder al proyecto
+## Paso 3 — Acceder al proyecto
 
 Suele estar esto ya configurado
 
