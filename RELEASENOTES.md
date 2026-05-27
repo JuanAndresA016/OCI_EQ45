@@ -35,8 +35,9 @@
 
 ## Known Issues
 
-- No Know Issues
-
+- Problemas con la Vectorizacion de strings
+- Embedings en la base de datos
+  
 ---
 
 ## Documentation & Links
