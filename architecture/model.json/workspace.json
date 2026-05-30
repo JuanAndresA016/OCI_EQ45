@@ -1,0 +1,714 @@
+{
+  "configuration" : { },
+  "description" : "Description",
+  "documentation" : { },
+  "id" : 0,
+  "model" : {
+    "deploymentNodes" : [ {
+      "containerInstances" : [ {
+        "containerId" : "13",
+        "environment" : "AWS",
+        "id" : "32",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "a7f5c0fc-e97a-4e7a-9f37-db828fa10a93"
+        },
+        "relationships" : [ {
+          "destinationId" : "35",
+          "id" : "36",
+          "linkedRelationshipId" : "29",
+          "sourceId" : "32"
+        }, {
+          "destinationId" : "40",
+          "id" : "41",
+          "linkedRelationshipId" : "30",
+          "sourceId" : "32"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "4",
+        "environment" : "AWS",
+        "id" : "33",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "de47a101-ef84-43ae-9a3e-47f967fe5377"
+        },
+        "relationships" : [ {
+          "description" : "Solicita autenticacion",
+          "destinationId" : "35",
+          "id" : "37",
+          "linkedRelationshipId" : "18",
+          "sourceId" : "33"
+        }, {
+          "description" : "Gestiona tareas",
+          "destinationId" : "40",
+          "id" : "42",
+          "linkedRelationshipId" : "19",
+          "sourceId" : "33"
+        }, {
+          "description" : "Solicita recomendaciones",
+          "destinationId" : "43",
+          "id" : "44",
+          "linkedRelationshipId" : "20",
+          "sourceId" : "33"
+        }, {
+          "description" : "Consulta estadisticas",
+          "destinationId" : "45",
+          "id" : "46",
+          "linkedRelationshipId" : "21",
+          "sourceId" : "33"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "5",
+        "environment" : "AWS",
+        "id" : "34",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "9be4e4b5-0cf3-4987-9bec-00975d087294"
+        },
+        "relationships" : [ {
+          "description" : "Gestiona usuarios",
+          "destinationId" : "38",
+          "id" : "39",
+          "linkedRelationshipId" : "22",
+          "sourceId" : "34"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "6",
+        "environment" : "AWS",
+        "id" : "35",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "f27ea044-6139-42cf-a595-d645a4a38c57"
+        },
+        "relationships" : [ {
+          "description" : "Consulta credenciales",
+          "destinationId" : "47",
+          "id" : "48",
+          "linkedRelationshipId" : "23",
+          "sourceId" : "35"
+        }, {
+          "description" : "Cifra tokens",
+          "destinationId" : "53",
+          "id" : "54",
+          "linkedRelationshipId" : "28",
+          "sourceId" : "35"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "7",
+        "environment" : "AWS",
+        "id" : "38",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "5665f676-5564-4c3a-a1f6-155d9275f2ab"
+        },
+        "relationships" : [ {
+          "description" : "Valida roles",
+          "destinationId" : "47",
+          "id" : "49",
+          "linkedRelationshipId" : "24",
+          "sourceId" : "38"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "8",
+        "environment" : "AWS",
+        "id" : "40",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "5ebe5dbf-27e0-4a88-8272-becac5528117"
+        },
+        "relationships" : [ {
+          "description" : "CRUD tareas",
+          "destinationId" : "47",
+          "id" : "50",
+          "linkedRelationshipId" : "25",
+          "sourceId" : "40"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "9",
+        "environment" : "AWS",
+        "id" : "43",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "bed9a50e-90f0-402d-b9a1-3423bfa85a41"
+        },
+        "relationships" : [ {
+          "description" : "Lee datos",
+          "destinationId" : "47",
+          "id" : "51",
+          "linkedRelationshipId" : "26",
+          "sourceId" : "43"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "10",
+        "environment" : "AWS",
+        "id" : "45",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "406695ed-1d1a-4116-a0bb-8fea374350a2"
+        },
+        "relationships" : [ {
+          "description" : "Procesa estadisticas",
+          "destinationId" : "47",
+          "id" : "52",
+          "linkedRelationshipId" : "27",
+          "sourceId" : "45"
+        } ],
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "11",
+        "environment" : "AWS",
+        "id" : "47",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "f9ceb448-ddf8-489f-926a-6f4f5c631b91"
+        },
+        "tags" : "Container Instance"
+      }, {
+        "containerId" : "12",
+        "environment" : "AWS",
+        "id" : "53",
+        "instanceId" : 1,
+        "properties" : {
+          "structurizr.dsl.identifier" : "32bfbd98-d7e3-49f3-89a6-129831ee8c80"
+        },
+        "tags" : "Container Instance"
+      } ],
+      "description" : "AWS Cloud",
+      "environment" : "AWS",
+      "id" : "31",
+      "instances" : "1",
+      "name" : "aws",
+      "properties" : {
+        "structurizr.dsl.identifier" : "5abd1abc-e5d3-4a7b-97b0-6549a9663e63"
+      },
+      "tags" : "Element,Deployment Node"
+    } ],
+    "people" : [ {
+      "description" : "Usuario que interactúa con el sistema.",
+      "id" : "1",
+      "name" : "Miembro del equipo",
+      "properties" : {
+        "structurizr.dsl.identifier" : "teamMember"
+      },
+      "relationships" : [ {
+        "description" : "Usa",
+        "destinationId" : "4",
+        "id" : "14",
+        "sourceId" : "1",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Usa",
+        "destinationId" : "3",
+        "id" : "15",
+        "linkedRelationshipId" : "14",
+        "sourceId" : "1"
+      } ],
+      "tags" : "Element,Person"
+    }, {
+      "description" : "Gestiona usuarios y configuraciones.",
+      "id" : "2",
+      "name" : "Administrador del proyecto",
+      "properties" : {
+        "structurizr.dsl.identifier" : "admin"
+      },
+      "relationships" : [ {
+        "description" : "Usa",
+        "destinationId" : "5",
+        "id" : "16",
+        "sourceId" : "2",
+        "tags" : "Relationship"
+      }, {
+        "description" : "Usa",
+        "destinationId" : "3",
+        "id" : "17",
+        "linkedRelationshipId" : "16",
+        "sourceId" : "2"
+      } ],
+      "tags" : "Element,Person"
+    } ],
+    "softwareSystems" : [ {
+      "containers" : [ {
+        "description" : "Frontend para miembros del equipo.",
+        "documentation" : { },
+        "id" : "4",
+        "name" : "Interfaz Web/Movil",
+        "properties" : {
+          "structurizr.dsl.identifier" : "webApp"
+        },
+        "relationships" : [ {
+          "description" : "Solicita autenticacion",
+          "destinationId" : "6",
+          "id" : "18",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Gestiona tareas",
+          "destinationId" : "8",
+          "id" : "19",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Solicita recomendaciones",
+          "destinationId" : "9",
+          "id" : "20",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Consulta estadisticas",
+          "destinationId" : "10",
+          "id" : "21",
+          "sourceId" : "4",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "React / Flutter"
+      }, {
+        "description" : "Frontend para administradores.",
+        "documentation" : { },
+        "id" : "5",
+        "name" : "Portal Administrativo",
+        "properties" : {
+          "structurizr.dsl.identifier" : "adminPortal"
+        },
+        "relationships" : [ {
+          "description" : "Gestiona usuarios",
+          "destinationId" : "7",
+          "id" : "22",
+          "sourceId" : "5",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Angular"
+      }, {
+        "description" : "Login y MFA.",
+        "documentation" : { },
+        "id" : "6",
+        "name" : "Servicio de autenticacion",
+        "properties" : {
+          "structurizr.dsl.identifier" : "authService"
+        },
+        "relationships" : [ {
+          "description" : "Consulta credenciales",
+          "destinationId" : "11",
+          "id" : "23",
+          "sourceId" : "6",
+          "tags" : "Relationship"
+        }, {
+          "description" : "Cifra tokens",
+          "destinationId" : "12",
+          "id" : "28",
+          "sourceId" : "6",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Spring Boot"
+      }, {
+        "description" : "Valida roles y permisos.",
+        "documentation" : { },
+        "id" : "7",
+        "name" : "Servicio de autorizacion",
+        "properties" : {
+          "structurizr.dsl.identifier" : "rbacService"
+        },
+        "relationships" : [ {
+          "description" : "Valida roles",
+          "destinationId" : "11",
+          "id" : "24",
+          "sourceId" : "7",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Spring Boot"
+      }, {
+        "description" : "CRUD de tareas y asignacion.",
+        "documentation" : { },
+        "id" : "8",
+        "name" : "Servicio de gestion de tareas",
+        "properties" : {
+          "structurizr.dsl.identifier" : "taskService"
+        },
+        "relationships" : [ {
+          "description" : "CRUD tareas",
+          "destinationId" : "11",
+          "id" : "25",
+          "sourceId" : "8",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Spring Boot"
+      }, {
+        "description" : "Genera recomendaciones basadas en analitica.",
+        "documentation" : { },
+        "id" : "9",
+        "name" : "IA de recomendaciones",
+        "properties" : {
+          "structurizr.dsl.identifier" : "recommender"
+        },
+        "relationships" : [ {
+          "description" : "Lee datos",
+          "destinationId" : "11",
+          "id" : "26",
+          "sourceId" : "9",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Python ML"
+      }, {
+        "description" : "Procesa estadisticas de uso y tareas.",
+        "documentation" : { },
+        "id" : "10",
+        "name" : "Servicio de analitica",
+        "properties" : {
+          "structurizr.dsl.identifier" : "analytics"
+        },
+        "relationships" : [ {
+          "description" : "Procesa estadisticas",
+          "destinationId" : "11",
+          "id" : "27",
+          "sourceId" : "10",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "Python / Spark"
+      }, {
+        "description" : "Almacena usuarios, tareas y configuraciones.",
+        "documentation" : { },
+        "id" : "11",
+        "name" : "Base de datos principal",
+        "properties" : {
+          "structurizr.dsl.identifier" : "db"
+        },
+        "tags" : "Element,Container",
+        "technology" : "PostgreSQL"
+      }, {
+        "description" : "Cifra y descifra datos sensibles.",
+        "documentation" : { },
+        "id" : "12",
+        "name" : "Servicio de cifrado",
+        "properties" : {
+          "structurizr.dsl.identifier" : "encrypt"
+        },
+        "tags" : "Element,Container",
+        "technology" : "AES-256"
+      }, {
+        "description" : "Distribuye trafico y escala horizontalmente.",
+        "documentation" : { },
+        "id" : "13",
+        "name" : "Balanceador de carga",
+        "properties" : {
+          "structurizr.dsl.identifier" : "lb"
+        },
+        "relationships" : [ {
+          "destinationId" : "6",
+          "id" : "29",
+          "sourceId" : "13",
+          "tags" : "Relationship"
+        }, {
+          "destinationId" : "8",
+          "id" : "30",
+          "sourceId" : "13",
+          "tags" : "Relationship"
+        } ],
+        "tags" : "Element,Container",
+        "technology" : "NGINX"
+      } ],
+      "description" : "Plataforma para colaboracion y seguridad.",
+      "documentation" : { },
+      "id" : "3",
+      "name" : "Sistema de gestion de proyectos",
+      "properties" : {
+        "structurizr.dsl.identifier" : "projectSystem"
+      },
+      "tags" : "Element,Software System"
+    } ]
+  },
+  "name" : "Name",
+  "properties" : {
+    "structurizr.inspection.error" : "41",
+    "structurizr.inspection.info" : "0",
+    "structurizr.inspection.ignore" : "0",
+    "structurizr.inspection.warning" : "0"
+  },
+  "views" : {
+    "configuration" : {
+      "styles" : { },
+      "terminology" : { },
+      "themes" : [ "https://static.structurizr.com/themes/default/theme.json" ]
+    },
+    "containerViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "5",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "7",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "8",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "9",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "10",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "12",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "13",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalSoftwareSystemBoundariesVisible" : false,
+      "generatedKey" : true,
+      "key" : "Container-001",
+      "name" : "Container View: Sistema de gestion de proyectos",
+      "order" : 2,
+      "relationships" : [ {
+        "id" : "14"
+      }, {
+        "id" : "16"
+      }, {
+        "id" : "18"
+      }, {
+        "id" : "19"
+      }, {
+        "id" : "20"
+      }, {
+        "id" : "21"
+      }, {
+        "id" : "22"
+      }, {
+        "id" : "23"
+      }, {
+        "id" : "24"
+      }, {
+        "id" : "25"
+      }, {
+        "id" : "26"
+      }, {
+        "id" : "27"
+      }, {
+        "id" : "28"
+      }, {
+        "id" : "29"
+      }, {
+        "id" : "30"
+      } ],
+      "softwareSystemId" : "3"
+    } ],
+    "deploymentViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "elements" : [ {
+        "id" : "31",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "32",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "33",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "34",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "35",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "38",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "40",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "43",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "45",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "47",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "53",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "environment" : "AWS",
+      "generatedKey" : true,
+      "key" : "Deployment-001",
+      "name" : "Deployment View: Sistema de gestion de proyectos - AWS",
+      "order" : 4,
+      "relationships" : [ {
+        "id" : "36"
+      }, {
+        "id" : "37"
+      }, {
+        "id" : "39"
+      }, {
+        "id" : "41"
+      }, {
+        "id" : "42"
+      }, {
+        "id" : "44"
+      }, {
+        "id" : "46"
+      }, {
+        "id" : "48"
+      }, {
+        "id" : "49"
+      }, {
+        "id" : "50"
+      }, {
+        "id" : "51"
+      }, {
+        "id" : "52"
+      }, {
+        "id" : "54"
+      } ],
+      "softwareSystemId" : "3"
+    } ],
+    "dynamicViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "description" : "Flujo de login",
+      "elementId" : "3",
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "4",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "6",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "11",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "externalBoundariesVisible" : false,
+      "key" : "LoginFlow",
+      "name" : "Dynamic View: Sistema de gestion de proyectos",
+      "order" : 3,
+      "relationships" : [ {
+        "description" : "Inicia sesion",
+        "id" : "14",
+        "order" : "1",
+        "response" : false
+      }, {
+        "description" : "Envia credenciales",
+        "id" : "18",
+        "order" : "2",
+        "response" : false
+      }, {
+        "description" : "Valida usuario",
+        "id" : "23",
+        "order" : "3",
+        "response" : false
+      }, {
+        "description" : "Devuelve token",
+        "id" : "18",
+        "order" : "4",
+        "response" : true
+      } ]
+    } ],
+    "systemContextViews" : [ {
+      "automaticLayout" : {
+        "edgeSeparation" : 50,
+        "nodeSeparation" : 50,
+        "rankDirection" : "LeftRight",
+        "rankSeparation" : 100,
+        "vertices" : true
+      },
+      "elements" : [ {
+        "id" : "1",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "2",
+        "x" : 0,
+        "y" : 0
+      }, {
+        "id" : "3",
+        "x" : 0,
+        "y" : 0
+      } ],
+      "enterpriseBoundaryVisible" : true,
+      "generatedKey" : true,
+      "key" : "SystemContext-001",
+      "name" : "System Context View: Sistema de gestion de proyectos",
+      "order" : 1,
+      "relationships" : [ {
+        "id" : "15"
+      }, {
+        "id" : "17"
+      } ],
+      "softwareSystemId" : "3"
+    } ]
+  }
+}

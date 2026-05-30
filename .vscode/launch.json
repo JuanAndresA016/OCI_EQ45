@@ -9,6 +9,16 @@
             "projectName": "mazetasks",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-TelegramBootApp<mazetasks>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.oci45.mazetasks.TelegramBootApp",
+            "projectName": "mazetasks",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
         }
     ]
 }
