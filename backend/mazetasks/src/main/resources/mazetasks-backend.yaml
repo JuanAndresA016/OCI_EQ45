@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mazetasks-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mazetasks-backend
+  template:
+    metadata:
+      labels:
+        app: mazetasks-backend
+    spec:
+      containers:
+        - name: mazetasks-backend
+          image: %DOCKER_REGISTRY%/mazetasks:0.1
+          ports:
+            - containerPort: 8080
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mazetasks-backend-service
+spec:
+  selector:
+    app: mazetasks-backend
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: ClusterIP
