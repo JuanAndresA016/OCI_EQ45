@@ -8,7 +8,6 @@ wallet/
 *.jks
 
 
-application.properties
 application.yml
 
 
