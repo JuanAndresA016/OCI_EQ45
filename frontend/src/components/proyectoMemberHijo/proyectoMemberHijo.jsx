@@ -2,6 +2,7 @@ import Aside from "../../layouts/aside/Aside";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./proyectoMemberHijo.css"
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function ProyectoMemberHijo() {
     const { proyecto_id, tarea_id } = useParams();
@@ -28,7 +29,7 @@ export default function ProyectoMemberHijo() {
 
     const fetchRoles = async (userId) => {
         const res = await fetch(
-            `http://163.192.149.69:8080/api/roles/proyecto/${proyecto_id}`
+            `${API_URL}/api/roles/proyecto/${proyecto_id}`
         );
 
         const data = await res.json();
@@ -40,7 +41,7 @@ export default function ProyectoMemberHijo() {
         try {
             setLoadingAI(true);
 
-            const res = await fetch("http://163.192.149.69:8080/api/ai/sugerencia", {
+            const res = await fetch(`${API_URL}/api/ai/sugerencia`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -66,7 +67,7 @@ export default function ProyectoMemberHijo() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/tarea-rol/${tarea_id}`,
+                `${API_URL}/api/tarea-rol/${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -88,7 +89,7 @@ export default function ProyectoMemberHijo() {
         try {
             const token = localStorage.getItem("token");
 
-            await fetch("http://163.192.149.69:8080/api/tarea-rol", {
+            await fetch(`${API_URL}/api/tarea-rol`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -112,7 +113,7 @@ export default function ProyectoMemberHijo() {
             const token = localStorage.getItem("token");
 
             await fetch(
-                `http://163.192.149.69:8080/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
+                `${API_URL}/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -145,7 +146,7 @@ export default function ProyectoMemberHijo() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/tareas/${taskId}`,
+                `${API_URL}/api/tareas/${taskId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -183,8 +184,8 @@ export default function ProyectoMemberHijo() {
 
         try {
             const token = localStorage.getItem("token");
+            const res = await fetch(`${API_URL}/api/tareas`, {
 
-            const res = await fetch("http://163.192.149.69:8080/api/tareas", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -204,7 +205,7 @@ export default function ProyectoMemberHijo() {
 
             // 🔥 refrescar tareas
             const updated = await fetch(
-                `http://163.192.149.69:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
+                `${API_URL}/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
             );
 
             const data = await updated.json();
@@ -245,7 +246,7 @@ export default function ProyectoMemberHijo() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/tareas/${editingTask.id}`,
+                `${API_URL}/api/tareas/${editingTask.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -263,7 +264,7 @@ export default function ProyectoMemberHijo() {
 
             // refrescar
             const updated = await fetch(
-                `http://163.192.149.69:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
+                `${API_URL}/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
             );
 
             const data = await updated.json();
@@ -282,7 +283,7 @@ export default function ProyectoMemberHijo() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
+                `${API_URL}/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -307,7 +308,7 @@ export default function ProyectoMemberHijo() {
                 if (!token) return;
 
                 // Usuario
-                const userRes = await fetch("http://163.192.149.69:8080/auth/me", {
+                const userRes = await fetch(`${API_URL}/auth/me`, {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
@@ -322,7 +323,7 @@ export default function ProyectoMemberHijo() {
                     const token = localStorage.getItem("token");
 
                     const res = await fetch(
-                        `http://163.192.149.69:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${userData.id}&padreId=${tarea_id}`,
+                        `${API_URL}/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${userData.id}&padreId=${tarea_id}`,
                         {
                             headers: {
                                 "Authorization": "Bearer " + token
@@ -338,7 +339,7 @@ export default function ProyectoMemberHijo() {
                     await fetchRoles(userData.id);
                     await fetchRolesByTask();
 
-                    const fetchTareaInfo = await fetch(`http://163.192.149.69:8080/api/tareas/${tarea_id}`)
+                    const fetchTareaInfo = await fetch(`${API_URL}/api/tareas/${tarea_id}`)
                     const resTareaInfo = await fetchTareaInfo.json()
                     setTareaInfo(resTareaInfo);
 

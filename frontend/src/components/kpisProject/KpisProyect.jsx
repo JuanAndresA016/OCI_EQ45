@@ -4,6 +4,7 @@ import { BarChart } from '@mui/x-charts/BarChart';
 import { OrbitProgress } from "react-loading-indicators";
 import Aside from "../../layouts/aside/Aside";
 import { useParams } from "react-router-dom";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function KpisProyect() {
 
@@ -15,8 +16,8 @@ export default function KpisProyect() {
 const { proyectoId } = useParams();
     useEffect(() => {
         Promise.all([
-            fetch(`http://163.192.149.69:8080/api/tareas/horas-sprint?proyectoId=${proyectoId}`),
-            fetch(`http://163.192.149.69:8080/api/tareas/tareas-completadas?proyectoId=${proyectoId}`)
+            fetch(`${API_URL}/api/tareas/horas-sprint?proyectoId=${proyectoId}`),
+            fetch(`${API_URL}/api/tareas/tareas-completadas?proyectoId=${proyectoId}`)
         ])
             .then(async ([hRes, tRes]) => {
                 const horasData = await hRes.json();

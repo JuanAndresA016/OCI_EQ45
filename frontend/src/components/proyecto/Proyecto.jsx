@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import "./Proyecto.css";
 import Aside from "../../layouts/aside/Aside";
 import { OrbitProgress } from "react-loading-indicators";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function Proyecto() {
     const { proyecto_id } = useParams();
@@ -41,7 +42,7 @@ export default function Proyecto() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/tareas/${editingTask.id}`,
+                `${API_URL}/api/tareas/${editingTask.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -59,7 +60,7 @@ export default function Proyecto() {
 
             // refrescar
             const updated = await fetch(
-                `http://163.192.149.69:8080/api/tareas?proyectoId=${proyecto_id}&creadorId=${user.id}`
+                `${API_URL}/api/tareas?proyectoId=${proyecto_id}&creadorId=${user.id}`
             );
 
             const data = await updated.json();
@@ -81,7 +82,7 @@ export default function Proyecto() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/tareas/${taskId}`,
+                `${API_URL}/api/tareas/${taskId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -149,7 +150,7 @@ export default function Proyecto() {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://163.192.149.69:8080/api/tareas", {
+            const res = await fetch(`${API_URL}/api/tareas`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -168,7 +169,7 @@ export default function Proyecto() {
 
             // 🔥 refrescar tareas
             const updated = await fetch(
-                `http://163.192.149.69:8080/api/tareas?proyectoId=${proyecto_id}&creadorId=${user.id}`
+                `${API_URL}/api/tareas?proyectoId=${proyecto_id}&creadorId=${user.id}`
             );
 
             const data = await updated.json();
@@ -194,7 +195,7 @@ export default function Proyecto() {
 
     const fetchPersonaRoles = async () => {
         const res = await fetch(
-            `http://163.192.149.69:8080/api/persona-rol/${proyecto_id}`
+            `${API_URL}/api/persona-rol/${proyecto_id}`
         );
         const data = await res.json();
         console.log(data)
@@ -207,7 +208,7 @@ export default function Proyecto() {
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://163.192.149.69:8080/api/persona-rol", {
+            const res = await fetch(`${API_URL}/api/persona-rol`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -239,7 +240,7 @@ export default function Proyecto() {
             console.log("DELETE:", personaId, rolId); // 👈 DEBUG
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/persona-rol?personaId=${personaId}&rolId=${rolId}`,
+                `${API_URL}/api/persona-rol?personaId=${personaId}&rolId=${rolId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -267,7 +268,7 @@ export default function Proyecto() {
 
     const fetchRoles = async (userId) => {
         const res = await fetch(
-            `http://163.192.149.69:8080/api/roles/proyecto/${proyecto_id}`
+            `${API_URL}/api/roles/proyecto/${proyecto_id}`
         );
 
         const data = await res.json();
@@ -283,7 +284,7 @@ export default function Proyecto() {
                 return;
             }
 
-            const res = await fetch("http://163.192.149.69:8080/api/roles", {
+            const res = await fetch(`${API_URL}/api/roles`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -318,7 +319,7 @@ export default function Proyecto() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/roles/${rolId}`,
+                `${API_URL}/api/roles/${rolId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -342,7 +343,7 @@ export default function Proyecto() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                "http://163.192.149.69:8080/api/personas-proyectos",
+                `${API_URL}/api/personas-proyectos`,
                 {
                     method: "POST",
                     headers: {
@@ -367,7 +368,7 @@ export default function Proyecto() {
 
             // refrescar lista
             const updated = await fetch(
-                `http://163.192.149.69:8080/api/personas-proyectos/${proyecto_id}/${user.id}`
+                `${API_URL}/api/personas-proyectos/${proyecto_id}/${user.id}`
             );
 
             const data = await updated.json();
@@ -390,7 +391,7 @@ export default function Proyecto() {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://163.192.149.69:8080/api/personas-proyectos?personaId=${memberId}&proyectoId=${proyecto_id}`,
+                `${API_URL}/api/personas-proyectos?personaId=${memberId}&proyectoId=${proyecto_id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -419,7 +420,7 @@ export default function Proyecto() {
                 const token = localStorage.getItem("token");
                 if (!token) return;
 
-                const userRes = await fetch("http://163.192.149.69:8080/auth/me", {
+                const userRes = await fetch(`${API_URL}/auth/me`, {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
@@ -431,7 +432,7 @@ export default function Proyecto() {
                 setUser(userData);
 
                 const resMembers = await fetch(
-                    `http://163.192.149.69:8080/api/personas-proyectos/${proyecto_id}/${userData.id}`
+                    `${API_URL}/api/personas-proyectos/${proyecto_id}/${userData.id}`
                 );
                 const membersData = await resMembers.json();
 
@@ -439,20 +440,20 @@ export default function Proyecto() {
 
                 // 🔹 ROLES
                 const resRoles = await fetch(
-                    `http://163.192.149.69:8080/api/roles/proyecto/${proyecto_id}`
+                    `${API_URL}/api/roles/proyecto/${proyecto_id}`
                 );
                 const rolesData = await resRoles.json();
                 setRoles(Array.isArray(rolesData) ? rolesData : []);
 
                 // 🔹 PERSONA-ROL
                 const resPersonaRoles = await fetch(
-                    `http://163.192.149.69:8080/api/persona-rol/${proyecto_id}`
+                    `${API_URL}/api/persona-rol/${proyecto_id}`
                 );
                 const personaRolesData = await resPersonaRoles.json();
                 setPersonaRoles(Array.isArray(personaRolesData) ? personaRolesData : []);
 
                 const resTasks = await fetch(
-                    `http://163.192.149.69:8080/api/tareas?proyectoId=${proyecto_id}&creadorId=${userData.id}`
+                    `${API_URL}/api/tareas?proyectoId=${proyecto_id}&creadorId=${userData.id}`
                 );
 
                 const tasksData = await resTasks.json();

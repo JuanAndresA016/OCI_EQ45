@@ -1,5 +1,6 @@
 import React from "react";
 import "./Progress.css";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function Progress() {
   const value = 80;

@@ -1,5 +1,6 @@
 import "./Register.css";
 import { useState, useEffect } from "react";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function Register() {
 
@@ -22,7 +23,7 @@ export default function Register() {
 
         
 
-        const response = await fetch("http://163.192.149.69:8080/auth/register", {
+        const response = await fetch(`${API_URL}/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

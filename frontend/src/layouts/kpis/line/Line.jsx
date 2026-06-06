@@ -1,6 +1,7 @@
 
 import Stack from '@mui/material/Stack';
 import { LineChart } from '@mui/x-charts/LineChart';
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 const margin = { right: 24 };
 const data = [10, 25, 40, 55, 60, 80];

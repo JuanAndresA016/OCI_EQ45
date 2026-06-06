@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import { BarChart } from '@mui/x-charts/BarChart';
 import "./Tasks.css"
 import { OrbitProgress } from "react-loading-indicators";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 const completadas = [20];
 const proceso = [10];

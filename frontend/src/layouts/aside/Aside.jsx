@@ -1,4 +1,5 @@
 import "./Aside.css";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 
 export default function Aside(){

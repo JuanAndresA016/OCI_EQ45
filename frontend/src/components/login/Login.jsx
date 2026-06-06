@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react"
 import "./Login.css";
 import { href } from "react-router-dom";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function Login() {
 
 //     const getUser = async () => {
 //   const token = localStorage.getItem("token");
 
-//   const response = await fetch("http://163.192.149.69:8080/auth/me", {
+//   const response = await fetch("${API_URL}/auth/me", {
 //     method: "GET",
 //     headers: {
 //       "Content-Type": "application/json",
@@ -42,7 +43,7 @@ const [error, SetError] = useState("");
     }else{
 
     
-    const response = await fetch("http://163.192.149.69:8080/auth/login", {
+    const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

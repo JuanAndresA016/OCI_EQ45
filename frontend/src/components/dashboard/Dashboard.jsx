@@ -4,6 +4,7 @@ import "./Dashboard.css";
 import { OrbitProgress } from "react-loading-indicators";
 import BasicDatePicker from "../../layouts/datepicker/BasicDatePicker";
 import dayjs from "dayjs";
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function Dashboard() {
 
@@ -45,7 +46,7 @@ export default function Dashboard() {
                 creadorId: user.id
             };
 
-            const response = await fetch(`http://163.192.149.69:8080/api/proyectos/${editId}`, {
+            const response = await fetch(`${API_URL}/api/proyectos/${editId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -59,7 +60,7 @@ export default function Dashboard() {
             }
 
              const nuevo = await fetch(
-                `http://163.192.149.69:8080/api/proyectos/creador/${user.id}`
+                `${API_URL}/api/proyectos/creador/${user.id}`
             );
 
             const nuevoProyecto = await nuevo.json();
@@ -92,7 +93,7 @@ export default function Dashboard() {
 
             if (!window.confirm("¿Seguro que quieres eliminar este proyecto?")) return;
 
-            const response = await fetch(`http://163.192.149.69:8080/api/proyectos/${id}`, {
+            const response = await fetch(`${API_URL}/api/proyectos/${id}`, {
                 method: "DELETE",
                 headers: {
                     "Authorization": "Bearer " + token
@@ -135,7 +136,7 @@ export default function Dashboard() {
 
             console.log("Enviando:", payload);
 
-            const response = await fetch("http://163.192.149.69:8080/api/proyectos", {
+            const response = await fetch(`${API_URL}/api/proyectos`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -151,7 +152,7 @@ export default function Dashboard() {
             }
 
             const nuevo = await fetch(
-                `http://163.192.149.69:8080/api/proyectos/creador/${user.id}`
+                `${API_URL}/api/proyectos/creador/${user.id}`
             );
 
             const nuevoProyecto = await nuevo.json();
@@ -196,7 +197,7 @@ export default function Dashboard() {
                 if (!token) return;
 
                 // Usuario
-                const userRes = await fetch("http://163.192.149.69:8080/auth/me", {
+                const userRes = await fetch(`${API_URL}/auth/me`, {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
@@ -208,7 +209,7 @@ export default function Dashboard() {
                 setUser(userData);
 
                 const projRes = await fetch(
-                    `http://163.192.149.69:8080/api/proyectos/creador/${userData.id}`
+                    `${API_URL}/api/proyectos/creador/${userData.id}`
                 );
 
 
@@ -220,7 +221,7 @@ export default function Dashboard() {
 
 
                 const projRes2 = await fetch(
-                    `http://163.192.149.69:8080/api/proyectos/miembro/${userData.id}`
+                    `${API_URL}/api/proyectos/miembro/${userData.id}`
                 );
 
 

@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, Stack, Typography, Avatar } from '@mui/material';
 import "./TaskUser.css"
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function TaskUser() {
 

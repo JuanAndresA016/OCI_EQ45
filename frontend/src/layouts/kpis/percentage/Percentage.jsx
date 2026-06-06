@@ -2,6 +2,7 @@
 //progress
 import Stack from '@mui/material/Stack';
 import { Gauge } from '@mui/x-charts/Gauge';
+import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 
 export default function Percentage() {
   return (
