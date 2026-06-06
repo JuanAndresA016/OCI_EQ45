@@ -35,10 +35,11 @@ jobs:
           docker build -t $IMAGE .
           docker push $IMAGE
 
-      - name: Configure kubectl for OKE
-        uses: oracle-actions/configure-kubectl-oke@v1.5.0
-        with:
-          cluster: ${{ secrets.OCI_CLUSTER_OCID }}
+      - - name: Configure kubectl for OKE
+  uses: oracle-actions/configure-kubectl-oke@v1.5.0
+  with:
+    cluster: ${{ secrets.OCI_CLUSTER_OCID }}
+    region: ${{ secrets.OCI_REGION }}
 
       - name: Deploy frontend
         run: |
