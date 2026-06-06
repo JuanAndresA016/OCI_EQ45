@@ -1,0 +1,47 @@
+name: Deploy Frontend to OKE
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "frontend/**"
+      - ".github/workflows/deploy-frontend.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Login to OCIR
+        run: |
+          echo "${{ secrets.OCIR_AUTH_TOKEN }}" | docker login ${{ secrets.OCIR_REGISTRY }} \
+            -u "${{ secrets.OCIR_USERNAME }}" \
+            --password-stdin
+
+      - name: Build frontend
+        working-directory: frontend
+        run: |
+          npm ci
+          npm run build
+
+      - name: Build and push Docker image
+        working-directory: frontend
+        run: |
+          IMAGE=${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCIR_NAMESPACE }}/mazetasks-frontend:${{ github.sha }}
+          docker build -t $IMAGE .
+          docker push $IMAGE
+
+      - name: Configure kubectl for OKE
+        uses: oracle-actions/configure-kubectl-oke@v1.5.0
+        with:
+          cluster: ${{ secrets.OCI_CLUSTER_OCID }}
+
+      - name: Deploy frontend
+        run: |
+          IMAGE=${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCIR_NAMESPACE }}/mazetasks-frontend:${{ github.sha }}
+          kubectl set image deployment/mazetasks-frontend mazetasks-frontend=$IMAGE
+          kubectl rollout status deployment/mazetasks-frontend
