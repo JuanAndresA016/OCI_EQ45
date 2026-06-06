@@ -1,0 +1,53 @@
+name: Deploy Backend to OKE
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "backend/mazetasks/**"
+      - ".github/workflows/deploy-backend.yml"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      OCI_CLI_USER: ${{ secrets.OCI_CLI_USER }}
+      OCI_CLI_TENANCY: ${{ secrets.OCI_CLI_TENANCY }}
+      OCI_CLI_FINGERPRINT: ${{ secrets.OCI_CLI_FINGERPRINT }}
+      OCI_CLI_KEY_CONTENT: ${{ secrets.OCI_CLI_KEY_CONTENT }}
+      OCI_CLI_REGION: ${{ secrets.OCI_CLI_REGION }}
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Login to OCIR
+        run: |
+          echo "${{ secrets.OCIR_AUTH_TOKEN }}" | docker login ${{ secrets.OCIR_REGISTRY }} \
+            -u "${{ secrets.OCIR_USERNAME }}" \
+            --password-stdin
+
+      - name: Build backend JAR
+        working-directory: backend/mazetasks
+        run: |
+          mvn clean package -DskipTests
+
+      - name: Build and push Docker image
+        working-directory: backend/mazetasks
+        run: |
+          IMAGE=${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCIR_NAMESPACE }}/mazetasks-backend:${{ github.sha }}
+          docker build -t $IMAGE .
+          docker push $IMAGE
+
+      - name: Configure kubectl for OKE
+        uses: oracle-actions/configure-kubectl-oke@v1.5.0
+        with:
+          cluster: ${{ secrets.OCI_CLUSTER_OCID }}
+
+      - name: Deploy backend
+        run: |
+          IMAGE=${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCIR_NAMESPACE }}/mazetasks-backend:${{ github.sha }}
+          kubectl set image deployment/mazetasks-backend mazetasks-backend=$IMAGE
+          kubectl rollout status deployment/mazetasks-backend
