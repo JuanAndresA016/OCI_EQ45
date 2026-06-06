@@ -13,7 +13,7 @@ export default function ProyectoMemberHijo() {
     const [tareaInfo, setTareaInfo] = useState([]);
     const [rolesAsignados, setRolesAsignados] = useState([]);
     const [aiSuggestion, setAiSuggestion] = useState("");
-const [loadingAI, setLoadingAI] = useState(false);
+    const [loadingAI, setLoadingAI] = useState(false);
 
     const [taskForm, setTaskForm] = useState({
         titulo: "",
@@ -28,7 +28,7 @@ const [loadingAI, setLoadingAI] = useState(false);
 
     const fetchRoles = async (userId) => {
         const res = await fetch(
-            `http://140.84.180.142:8080/api/roles/proyecto/${proyecto_id}`
+            `http://163.192.149.69:8080/api/roles/proyecto/${proyecto_id}`
         );
 
         const data = await res.json();
@@ -37,36 +37,36 @@ const [loadingAI, setLoadingAI] = useState(false);
 
 
     const getAISuggestion = async () => {
-    try {
-        setLoadingAI(true);
+        try {
+            setLoadingAI(true);
 
-        const res = await fetch("http://140.84.180.142:8080/api/ai/sugerencia", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                titulo: tareaInfo.titulo,
-                descripcion: tareaInfo.descripcion
-            })
-        });
+            const res = await fetch("http://163.192.149.69:8080/api/ai/sugerencia", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    titulo: tareaInfo.titulo,
+                    descripcion: tareaInfo.descripcion
+                })
+            });
 
-        const data = await res.text();
+            const data = await res.text();
 
-        setAiSuggestion(data);
+            setAiSuggestion(data);
 
-    } catch (err) {
-        console.error(err);
-    } finally {
-        setLoadingAI(false);
-    }
-};
+        } catch (err) {
+            console.error(err);
+        } finally {
+            setLoadingAI(false);
+        }
+    };
     const fetchRolesByTask = async () => {
         try {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://140.84.180.142:8080/api/tarea-rol/${tarea_id}`,
+                `http://163.192.149.69:8080/api/tarea-rol/${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -88,7 +88,7 @@ const [loadingAI, setLoadingAI] = useState(false);
         try {
             const token = localStorage.getItem("token");
 
-            await fetch("http://140.84.180.142:8080/api/tarea-rol", {
+            await fetch("http://163.192.149.69:8080/api/tarea-rol", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -112,7 +112,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             await fetch(
-                `http://140.84.180.142:8080/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
+                `http://163.192.149.69:8080/api/tarea-rol?tareaId=${tarea_id}&rolId=${rolId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -145,7 +145,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://140.84.180.142:8080/api/tareas/${taskId}`,
+                `http://163.192.149.69:8080/api/tareas/${taskId}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -184,7 +184,7 @@ const [loadingAI, setLoadingAI] = useState(false);
         try {
             const token = localStorage.getItem("token");
 
-            const res = await fetch("http://140.84.180.142:8080/api/tareas", {
+            const res = await fetch("http://163.192.149.69:8080/api/tareas", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -204,7 +204,7 @@ const [loadingAI, setLoadingAI] = useState(false);
 
             // 🔥 refrescar tareas
             const updated = await fetch(
-                `http://140.84.180.142:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
+                `http://163.192.149.69:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
             );
 
             const data = await updated.json();
@@ -232,20 +232,20 @@ const [loadingAI, setLoadingAI] = useState(false);
     const handleUpdateTask = async () => {
 
         if (
-    !editingTask.titulo ||
-    !editingTask.descripcion ||
-    !editingTask.fechaInicio ||
-    !editingTask.fechaFin ||
-    !editingTask.horasTrabajadas
-) {
-    alert("Todos los campos son obligatorios");
-    return;
-}
+            !editingTask.titulo ||
+            !editingTask.descripcion ||
+            !editingTask.fechaInicio ||
+            !editingTask.fechaFin ||
+            !editingTask.horasTrabajadas
+        ) {
+            alert("Todos los campos son obligatorios");
+            return;
+        }
         try {
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://140.84.180.142:8080/api/tareas/${editingTask.id}`,
+                `http://163.192.149.69:8080/api/tareas/${editingTask.id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -263,7 +263,7 @@ const [loadingAI, setLoadingAI] = useState(false);
 
             // refrescar
             const updated = await fetch(
-                `http://140.84.180.142:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
+                `http://163.192.149.69:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
             );
 
             const data = await updated.json();
@@ -282,7 +282,7 @@ const [loadingAI, setLoadingAI] = useState(false);
             const token = localStorage.getItem("token");
 
             const res = await fetch(
-                `http://140.84.180.142:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
+                `http://163.192.149.69:8080/api/tareas/proyectos/${proyecto_id}/tareas?creadorId=${user.id}&padreId=${tarea_id}`,
                 {
                     headers: {
                         "Authorization": "Bearer " + token
@@ -307,7 +307,7 @@ const [loadingAI, setLoadingAI] = useState(false);
                 if (!token) return;
 
                 // Usuario
-                const userRes = await fetch("http://140.84.180.142:8080/auth/me", {
+                const userRes = await fetch("http://163.192.149.69:8080/auth/me", {
                     headers: {
                         "Authorization": "Bearer " + token
                     }
@@ -322,7 +322,7 @@ const [loadingAI, setLoadingAI] = useState(false);
                     const token = localStorage.getItem("token");
 
                     const res = await fetch(
-                        `http://140.84.180.142:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${userData.id}&padreId=${tarea_id}`,
+                        `http://163.192.149.69:8080/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${userData.id}&padreId=${tarea_id}`,
                         {
                             headers: {
                                 "Authorization": "Bearer " + token
@@ -338,7 +338,7 @@ const [loadingAI, setLoadingAI] = useState(false);
                     await fetchRoles(userData.id);
                     await fetchRolesByTask();
 
-                    const fetchTareaInfo = await fetch(`http://140.84.180.142:8080/api/tareas/${tarea_id}`)
+                    const fetchTareaInfo = await fetch(`http://163.192.149.69:8080/api/tareas/${tarea_id}`)
                     const resTareaInfo = await fetchTareaInfo.json()
                     setTareaInfo(resTareaInfo);
 
@@ -405,7 +405,7 @@ const [loadingAI, setLoadingAI] = useState(false);
                                     <span key={r.rolId} className="role_tag">
                                         {rol ? rol.nombre : "Rol"}
 
-                                        
+
                                     </span>
                                 );
                             })}
@@ -443,10 +443,10 @@ const [loadingAI, setLoadingAI] = useState(false);
 
                         </div>
 
-<div>
+                        <div>
                             <button className="btn_create_task" onClick={() => setShowTaskForm(true)} > + Crear tarea </button>
 
-</div>
+                        </div>
 
                         {editingTask && (
                             <div className="modal">
@@ -480,16 +480,16 @@ const [loadingAI, setLoadingAI] = useState(false);
                                     </select>
 
                                     <input
-    type="number"
-    placeholder="Horas trabajadas"
-    value={editingTask.horasTrabajadas || ""}
-    onChange={(e) =>
-        setEditingTask({
-            ...editingTask,
-            horasTrabajadas: e.target.value
-        })
-    }
-/>
+                                        type="number"
+                                        placeholder="Horas trabajadas"
+                                        value={editingTask.horasTrabajadas || ""}
+                                        onChange={(e) =>
+                                            setEditingTask({
+                                                ...editingTask,
+                                                horasTrabajadas: e.target.value
+                                            })
+                                        }
+                                    />
 
                                     <input
                                         type="date"
@@ -733,21 +733,21 @@ const [loadingAI, setLoadingAI] = useState(false);
                         </div>
                     </div>
 
-<button className="btn_ai" onClick={getAISuggestion}>
-    <i class="fa-solid fa-wand-magic-sparkles"></i> Sugerencia de la IA cómo empezar
-</button>
+                    <button className="btn_ai" onClick={getAISuggestion}>
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Sugerencia de la IA cómo empezar
+                    </button>
 
-{loadingAI && <p>Generando sugerencia...</p>}
+                    {loadingAI && <p>Generando sugerencia...</p>}
 
-{aiSuggestion && (
-    <div className="ai_box">
-        <h3>Recomendación IA</h3>
-        <pre>{aiSuggestion}</pre>
-    </div>
-)}
-        
+                    {aiSuggestion && (
+                        <div className="ai_box">
+                            <h3>Recomendación IA</h3>
+                            <pre>{aiSuggestion}</pre>
+                        </div>
+                    )}
+
                 </div>
-    </div>
+            </div>
         </div>
     </>)
 }
