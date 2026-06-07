@@ -1,4 +1,4 @@
-name: Deploy Backend to OKE
+name: Deploy Backend Blue/Green to OKE
 
 on:
   push:
@@ -40,14 +40,46 @@ jobs:
           IMAGE=${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCIR_NAMESPACE }}/mazetasks-backend:${{ github.sha }}
           docker build -t $IMAGE .
           docker push $IMAGE
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
       - name: Configure kubectl for OKE
         uses: oracle-actions/configure-kubectl-oke@v1.5.0
         with:
           cluster: ${{ secrets.OCI_CLUSTER_OCID }}
 
-      - name: Deploy backend
+      - name: Detect active color
         run: |
-          IMAGE=${{ secrets.OCIR_REGISTRY }}/${{ secrets.OCIR_NAMESPACE }}/mazetasks-backend:${{ github.sha }}
-          kubectl set image deployment/mazetasks-backend mazetasks-backend=$IMAGE
-          kubectl rollout status deployment/mazetasks-backend
+          ACTIVE_COLOR=$(kubectl get svc mazetasks-backend-service -o jsonpath='{.spec.selector.color}')
+
+          if [ "$ACTIVE_COLOR" = "blue" ]; then
+            TARGET_COLOR="green"
+            TARGET_DEPLOYMENT="mazetasks-backend-green"
+          else
+            TARGET_COLOR="blue"
+            TARGET_DEPLOYMENT="mazetasks-backend"
+          fi
+
+          echo "ACTIVE_COLOR=$ACTIVE_COLOR" >> $GITHUB_ENV
+          echo "TARGET_COLOR=$TARGET_COLOR" >> $GITHUB_ENV
+          echo "TARGET_DEPLOYMENT=$TARGET_DEPLOYMENT" >> $GITHUB_ENV
+
+          echo "Active color: $ACTIVE_COLOR"
+          echo "Deploying to: $TARGET_COLOR"
+          echo "Target deployment: $TARGET_DEPLOYMENT"
+
+      - name: Deploy new image to inactive color
+        run: |
+          kubectl set image deployment/$TARGET_DEPLOYMENT mazetasks-backend=$IMAGE
+          kubectl rollout status deployment/$TARGET_DEPLOYMENT
+
+      - name: Switch traffic to new color
+        run: |
+          kubectl patch svc mazetasks-backend-service \
+            -p "{\"spec\":{\"selector\":{\"app\":\"mazetasks-backend\",\"color\":\"$TARGET_COLOR\"}}}"
+
+          echo "Traffic switched from $ACTIVE_COLOR to $TARGET_COLOR"
+
+      - name: Verify active backend
+        run: |
+          kubectl get svc mazetasks-backend-service -o yaml | grep -A4 selector
+          kubectl get pods --show-labels
