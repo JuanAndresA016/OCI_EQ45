@@ -278,7 +278,7 @@ export default function Dashboard() {
                     <h1>Tablero principal</h1>
 
                     <div className="dasboard_container_content_projects">
-                        <h2>Mis proyectoss</h2>
+                        <h2>Mis proyectos</h2>
                         <span>Gestiona y supervisa todos los proyectos del equipo</span>
 
                         {/* 🔹 CONTADORES */}
