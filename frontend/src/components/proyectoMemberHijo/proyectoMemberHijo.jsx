@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./proyectoMemberHijo.css"
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
+import Header from "../../layouts/header/Header";
 
 export default function ProyectoMemberHijo() {
     const { proyecto_id, tarea_id } = useParams();
@@ -371,16 +372,8 @@ export default function ProyectoMemberHijo() {
             <Aside />
 
             <div className="dashboard">
-                <header className="dashboard_container_header">
-                    <div className="input_header_container">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                        <input type="text" placeholder="Buscar proyectos, tareas, miembros" />
-                    </div>
-
-                    <div className="dashboard_container_announcements">
-                        <i className="fa-regular fa-bell"></i>
-                    </div>
-                </header>
+                <Header proyectoId={proyecto_id}/>
+                
 
                 <div className="dashboard_container_content">
                     <div className="dashboard_container_content">

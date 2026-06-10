@@ -66,17 +66,7 @@ const { proyectoId } = useParams();
 
                 <div className="dashboard">
                     <div className="dashboard_container">
-                        <header className="dashboard_container_header">
-                            <div className="input_header_container">
-                                <i class="fa-solid fa-magnifying-glass"></i>
-                                <input type="text" placeholder="Buscar proyectos, tareas, miembros" />
-                            </div>
-
-                            <div className="dashboard_container_announcements">
-                                <i class="fa-regular fa-bell"></i>
-
-                            </div>
-                        </header>
+                        
 
                         <div className="dashboard_container_content">
                             <div>

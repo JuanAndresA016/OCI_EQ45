@@ -1,0 +1,31 @@
+.modal_content_search{
+    max-height: 80vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    position: relative;
+    button{
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        position: sticky;
+        top: 20px;
+    }
+}
+
+.resultado_semantico{
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.resultado_semantico:hover{
+    background-color: #f0f0f0;
+}

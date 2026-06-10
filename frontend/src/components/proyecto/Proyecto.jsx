@@ -4,6 +4,8 @@ import "./Proyecto.css";
 import Aside from "../../layouts/aside/Aside";
 import { OrbitProgress } from "react-loading-indicators";
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
+import Header from "../../layouts/header/Header";
+
 
 export default function Proyecto() {
     const { proyecto_id } = useParams();
@@ -482,16 +484,7 @@ export default function Proyecto() {
 
             <div className="dashboard">
                 <div className="dashboard_container">
-                    <header className="dashboard_container_header">
-                        <div className="input_header_container">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                            <input type="text" placeholder="Buscar proyectos, tareas, miembros" />
-                        </div>
-
-                        <div className="dashboard_container_announcements">
-                            <i className="fa-regular fa-bell"></i>
-                        </div>
-                    </header>
+                   <Header proyectoId={proyecto_id}/>
 
                     <div className="dashboard_container_content">
                         <h1>Mi portal</h1>

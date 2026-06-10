@@ -261,14 +261,14 @@ export default function Dashboard() {
 
             <div className="dashboard">
                 <header className="dashboard_container_header">
-                    <div className="input_header_container">
+                    {/* <div className="input_header_container">
                         <i className="fa-solid fa-magnifying-glass"></i>
                         <input type="text" placeholder="Buscar proyectos, tareas, miembros" />
                     </div>
 
                     <div className="dashboard_container_announcements">
                         <i className="fa-regular fa-bell"></i>
-                    </div>
+                    </div> */}
                 </header>
 
 
