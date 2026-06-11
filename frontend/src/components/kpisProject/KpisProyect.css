@@ -1,0 +1,11 @@
+.kpi_filter {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.kpi_filter select {
+    padding: 8px 12px;
+    border-radius: 8px;
+}
