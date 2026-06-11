@@ -171,8 +171,17 @@ public class AICopilotService {
         tarea.setEstado(tareaPlan.getEstado() != null ? tareaPlan.getEstado() : "PENDIENTE");
         tarea.setTipoMedicion(tareaPlan.getTipoMedicion() != null ? tareaPlan.getTipoMedicion() : "HORAS");
         tarea.setHorasTrabajadas(tareaPlan.getHorasTrabajadas() != null ? tareaPlan.getHorasTrabajadas() : 0);
-        tarea.setFechaInicio(LocalDate.now());
-        tarea.setFechaFin(LocalDate.now().plusDays(7));
+        tarea.setFechaInicio(
+        tareaPlan.getFechaInicio() != null
+                ? LocalDate.parse(tareaPlan.getFechaInicio())
+                : LocalDate.now()
+);
+
+tarea.setFechaFin(
+        tareaPlan.getFechaFin() != null
+                ? LocalDate.parse(tareaPlan.getFechaFin())
+                : LocalDate.now().plusDays(7)
+);
 
         Tarea guardada = tareaService.crear(tarea);
 
