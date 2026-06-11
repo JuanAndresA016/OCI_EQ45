@@ -96,3 +96,73 @@
 
     
 }
+
+.mobile_menu_btn{
+    display:none;
+}
+
+.close_menu_btn{
+    display:none;
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media (max-width:800px){
+
+    .mobile_menu_btn{
+        display:flex;
+        position:fixed;
+        top:15px;
+        left:15px;
+        z-index:2000;
+
+        width:45px;
+        height:45px;
+
+        border:none;
+        border-radius:10px;
+
+        background:#4040FB;
+        color:#fff;
+
+        font-size:22px;
+        cursor:pointer;
+
+        align-items:center;
+        justify-content:center;
+    }
+
+    .aside_container{
+        position:fixed;
+        left:-280px;
+        top:0;
+
+        width:260px;
+        height:100vh;
+
+        z-index:1999;
+
+        transition:0.3s;
+    }
+
+    .aside_container.open{
+        left:0;
+    }
+
+    .close_menu_btn{
+        display:block;
+
+        position:absolute;
+        top:15px;
+        right:15px;
+
+        border:none;
+        background:none;
+
+        font-size:22px;
+        cursor:pointer;
+    }
+
+}

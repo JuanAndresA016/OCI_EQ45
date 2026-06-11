@@ -654,3 +654,159 @@
     display: flex;
     justify-content: space-between;
 }
+
+/* ==========================
+   TABLETS
+========================== */
+
+@media (max-width: 1024px) {
+
+    .dashboard_cards{
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .task_info{
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .members_container{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .actions_card{
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .tareas_container_element{
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media (max-width: 768px) {
+
+    .dashboard_container_content{
+        width: 100%;
+    }
+
+    .dashboard_cards{
+        grid-template-columns: 1fr;
+    }
+
+    .add_member_form{
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .add_member_form input,
+    .add_member_form button{
+        width: 100%;
+    }
+
+    .members{
+        width: 100%;
+    }
+
+    .members_container{
+        width: 100%;
+        gap: 15px;
+    }
+
+    .roles_asignacion select{
+        width: 100%;
+    }
+
+    .roles_usuario{
+        width: 100%;
+    }
+
+    .kanban{
+        gap: 20px;
+    }
+
+    .column{
+        width: 100%;
+    }
+
+    .task_card{
+        width: 100%;
+    }
+
+    .task_form{
+        width: 100%;
+    }
+
+    .task_form_buttons{
+        flex-direction: column;
+    }
+
+    .task_form_buttons button{
+        width: 100%;
+    }
+
+    .btn_create_task{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .actions_card{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .task_info{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .modal_content{
+        width: 95%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+
+}
+
+
+/* ==========================
+   SMALL PHONES
+========================== */
+
+@media (max-width: 480px) {
+
+      
+
+    .card h2{
+        font-size: 22px;
+    }
+
+    .column h3{
+        font-size: 16px;
+    }
+
+    .task_title{
+        font-size: 14px;
+    }
+
+    .task_info{
+        font-size: 12px;
+    }
+
+    .members_container p{
+        font-size: 13px;
+        word-break: break-word;
+    }
+
+    .rol_item{
+        font-size: 11px;
+    }
+
+}

@@ -1,13 +1,27 @@
 import "./Aside.css";
-import { API_URL, EMBEDDINGS_URL } from "../../services/api";
+import { useState } from "react";
 
+export default function Aside() {
 
-export default function Aside(){
+    const [open, setOpen] = useState(false);
 
-
-    return(
+    return (
         <>
-            <div className="aside_container">
+            <button
+                className="mobile_menu_btn"
+                onClick={() => setOpen(true)}
+            >
+                ☰
+            </button>
+
+            <div className={`aside_container ${open ? "open" : ""}`}>
+
+                <button
+                    className="close_menu_btn"
+                    onClick={() => setOpen(false)}
+                >
+                    ✕
+                </button>
 
                 <div className="aside_container_element">
 
@@ -22,9 +36,20 @@ export default function Aside(){
 
                     <div className="aside_container_element_options">
                         <nav className="aside_container_element_options_nav">
-                            <a href="/dashboard"><i class="fa-regular fa-folder"></i>Proyectos</a>
-                            <a href="/calendar"><i class="fa-solid fa-calendar"></i>Calendarios</a>
-                            <a href="/kpis"><i class="fa-solid fa-arrow-trend-up"></i>KPIs</a>
+                            <a href="/dashboard">
+                                <i className="fa-regular fa-folder"></i>
+                                Proyectos
+                            </a>
+
+                            <a href="/calendar">
+                                <i className="fa-solid fa-calendar"></i>
+                                Calendarios
+                            </a>
+
+                            <a href="/kpis">
+                                <i className="fa-solid fa-arrow-trend-up"></i>
+                                KPIs
+                            </a>
                         </nav>
                     </div>
                 </div>
@@ -40,10 +65,9 @@ export default function Aside(){
                         </div>
                     </div>
 
-                    
                 </div>
 
             </div>
         </>
-    )
+    );
 }
