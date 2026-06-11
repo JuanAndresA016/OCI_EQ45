@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import "./proyectoMemberHijo.css"
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 import Header from "../../layouts/header/Header";
+import AiCopilot from "../../layouts/aiCopilot/AiCopilot";
 
 export default function ProyectoMemberHijo() {
     const { proyecto_id, tarea_id } = useParams();
@@ -439,6 +440,18 @@ export default function ProyectoMemberHijo() {
 
                         <div>
                             <button className="btn_create_task" onClick={() => setShowTaskForm(true)} > + Crear tarea </button>
+                            <AiCopilot
+    proyectoId={proyecto_id}
+    tareaPadreId={tarea_id}
+    onPlanApplied={async () => {
+        const updated = await fetch(
+            `${API_URL}/api/tareas/filtradas?proyectoId=${proyecto_id}&personaId=${user.id}&padreId=${tarea_id}`
+        );
+
+        const data = await updated.json();
+        setTasks(Array.isArray(data) ? data : []);
+    }}
+/>
 
                         </div>
 

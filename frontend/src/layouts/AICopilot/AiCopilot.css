@@ -1,0 +1,68 @@
+.btn_ai_copilot {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.ai_copilot_modal {
+    max-width: 850px;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+.ai_prompt_input {
+    width: 100%;
+    min-height: 120px;
+    resize: vertical;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    margin: 12px 0;
+}
+
+.ai_plan_result {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 12px;
+    background: #f7f7ff;
+}
+
+.ai_roles {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 16px;
+}
+
+.ai_tasks_tree {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.ai_task_item {
+    padding: 12px;
+    border-left: 3px solid #4040fb;
+    background: white;
+    border-radius: 8px;
+}
+
+.ai_task_item p {
+    margin: 6px 0;
+}
+
+.ai_task_meta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.ai_task_meta span {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #eee;
+}

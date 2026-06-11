@@ -5,8 +5,7 @@ import Aside from "../../layouts/aside/Aside";
 import { OrbitProgress } from "react-loading-indicators";
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 import Header from "../../layouts/header/Header";
-
-
+import AiCopilot from "../../layouts/aiCopilot/AiCopilot";
 export default function Proyecto() {
     const { proyecto_id } = useParams();
     const [user, setUser] = useState(null);
@@ -495,6 +494,20 @@ export default function Proyecto() {
                             >
                                 + Crear tarea
                             </button>
+
+                            <AiCopilot
+    proyectoId={proyecto_id}
+    onPlanApplied={async () => {
+        const updated = await fetch(
+            `${API_URL}/api/tareas?proyectoId=${proyecto_id}&creadorId=${user.id}`
+        );
+
+        const data = await updated.json();
+        setTasks(Array.isArray(data) ? data : []);
+
+        fetchRoles();
+    }}
+/>
                             {editingTask && (
                                 <div className="modal">
 
