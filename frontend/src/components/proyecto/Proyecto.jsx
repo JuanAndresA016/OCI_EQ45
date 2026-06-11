@@ -6,6 +6,7 @@ import { OrbitProgress } from "react-loading-indicators";
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 import Header from "../../layouts/header/Header";
 import AiCopilot from "../../layouts/AICopilot/AiCopilot";
+import TaskCalendar from "../taskcalendar/TaskCalendar";
 
 export default function Proyecto() {
     const { proyecto_id } = useParams();
@@ -959,6 +960,8 @@ export default function Proyecto() {
                     </div>
                 </div>
             </div>
-        </div>
+
+
+   </div>
     );
 }

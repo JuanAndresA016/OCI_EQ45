@@ -8,6 +8,8 @@ import TareaHija from "./components/tareaHija/TareaHija";
 import ProyectoMember from "./components/proyectoMember/proyectoMember";
 import ProyectoMemberHijo from "./components/proyectoMemberHijo/proyectoMemberHijo";
 import KpisProyect from "./components/kpisProject/KpisProyect";
+import TaskCalendar from "./components/taskcalendar/TaskCalendar";
+import Calendar from "./components/calendar/Calendar";
 
 export default function App() {
   return (
@@ -22,7 +24,10 @@ export default function App() {
         <Route path="/proyecto_miembro/:proyecto_id" element={<ProyectoMember />}/>
         <Route path="/proyecto_miembro/:proyecto_id/tarea/:tarea_id" element={<ProyectoMemberHijo />}/>
         <Route path="/proyecto-kpi/:proyectoId" element={<KpisProyect />}/>
-      </Routes>
+        <Route path="/proyecto/:proyectoId/calendar" element={<TaskCalendar />} />
+        <Route path="/calendar" element={<Calendar />} />
+
+        </Routes>
     </BrowserRouter>
   );
 }

@@ -65,6 +65,10 @@ public class TareaController {
         return ResponseEntity.ok(
                 service.obtenerTareasConPadre(proyectoId, personaId, padreId));
     }
+    @GetMapping("/proyecto/{proyectoId}/todas")
+public List<Tarea> obtenerTodasPorProyecto(@PathVariable Long proyectoId) {
+    return service.obtenerTodasPorProyecto(proyectoId);
+}
 
     @GetMapping("/padre")
     public ResponseEntity<List<Tarea>> obtenerPadres(

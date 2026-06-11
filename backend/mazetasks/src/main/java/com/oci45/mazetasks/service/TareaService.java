@@ -121,6 +121,9 @@ public class TareaService {
 
         return tareaGuardada;
     }
+    public List<Tarea> obtenerTodasPorProyecto(Long proyectoId) {
+    return repo.findByProyectoId(proyectoId);
+}
 
     public Tarea actualizar(Long id, Tarea nueva) {
         Tarea t = repo.findById(id).orElseThrow();

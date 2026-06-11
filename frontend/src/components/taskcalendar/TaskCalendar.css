@@ -1,0 +1,73 @@
+.task_calendar {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 24px;
+}
+
+.calendar_header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.calendar_header button {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.calendar_weekdays,
+.calendar_grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.calendar_weekdays span {
+    font-weight: 700;
+    text-align: center;
+}
+
+.calendar_day {
+    min-height: 110px;
+    background: #f7f7ff;
+    border-radius: 10px;
+    padding: 8px;
+    overflow: hidden;
+}
+
+.calendar_day.empty {
+    background: transparent;
+}
+
+.calendar_tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin-top: 6px;
+}
+
+.calendar_task {
+    font-size: 12px;
+    text-decoration: none;
+    padding: 5px 7px;
+    border-radius: 6px;
+    background: #e8e8ff;
+    color: #222;
+}
+
+.calendar_task.COMPLETADA {
+    background: #dff7df;
+}
+
+.calendar_task.EN_PROGRESO {
+    background: #fff3cd;
+}
+
+.calendar_task.PENDIENTE {
+    background: #e8e8ff;
+}

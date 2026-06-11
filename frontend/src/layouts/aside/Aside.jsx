@@ -23,7 +23,7 @@ export default function Aside(){
                     <div className="aside_container_element_options">
                         <nav className="aside_container_element_options_nav">
                             <a href="/dashboard"><i class="fa-regular fa-folder"></i>Proyectos</a>
-                            <a href=""><i class="fa-solid fa-users"></i>Equipos</a>
+                            <a href="/calendar"><i class="fa-solid fa-calendar"></i>Calendarios</a>
                             <a href="/kpis"><i class="fa-solid fa-arrow-trend-up"></i>KPIs</a>
                         </nav>
                     </div>
