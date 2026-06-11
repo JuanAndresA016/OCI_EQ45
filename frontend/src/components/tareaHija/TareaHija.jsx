@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 import Header from "../../layouts/header/Header";
-import AiCopilot from "../../layouts/aiCopilot/AiCopilot";
+import AiCopilot from "../../layouts/AICopilot/AiCopilot";
 
 export default function TareaHija() {
     const { proyecto_id, tarea_id } = useParams();

@@ -5,7 +5,8 @@ import Aside from "../../layouts/aside/Aside";
 import { OrbitProgress } from "react-loading-indicators";
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 import Header from "../../layouts/header/Header";
-import AiCopilot from "../../layouts/aiCopilot/AiCopilot";
+import AiCopilot from "../../layouts/AICopilot/AiCopilot";
+
 export default function Proyecto() {
     const { proyecto_id } = useParams();
     const [user, setUser] = useState(null);
