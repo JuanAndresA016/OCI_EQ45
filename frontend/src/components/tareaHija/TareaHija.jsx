@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 import Header from "../../layouts/header/Header";
 import AiCopilot from "../../layouts/AICopilot/AiCopilot";
+import ComentariosTarea from "../../layouts/comentariosTarea/ComentariosTarea";
 
 export default function TareaHija() {
     const { proyecto_id, tarea_id } = useParams();
@@ -718,7 +719,12 @@ export default function TareaHija() {
                                     </div>
                                 ))}
                             </div>
-
+                                {user && (
+    <ComentariosTarea
+        tareaId={tarea_id}
+        personaId={user.id}
+    />
+)}
                         </div>
                     </div>
 
