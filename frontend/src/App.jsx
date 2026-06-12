@@ -10,6 +10,8 @@ import ProyectoMemberHijo from "./components/proyectoMemberHijo/proyectoMemberHi
 import KpisProyect from "./components/kpisProject/KpisProyect";
 import TaskCalendar from "./components/taskcalendar/TaskCalendar";
 import Calendar from "./components/calendar/Calendar";
+import Landing from "./components/landing/Landing";
+import NotFound from "./components/notFound/NotFound";
 
 export default function App() {
   return (
@@ -26,7 +28,8 @@ export default function App() {
         <Route path="/proyecto-kpi/:proyectoId" element={<KpisProyect />}/>
         <Route path="/proyecto/:proyectoId/calendar" element={<TaskCalendar />} />
         <Route path="/calendar" element={<Calendar />} />
-
+        <Route path="/" element={<Landing />} />
+        <Route path="*" element={<NotFound />} />
         </Routes>
     </BrowserRouter>
   );

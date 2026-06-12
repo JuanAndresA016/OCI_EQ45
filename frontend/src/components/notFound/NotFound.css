@@ -1,0 +1,95 @@
+.not_found {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f7f7ff;
+    padding: 20px;
+}
+
+.not_found_container {
+    width: 100%;
+    max-width: 600px;
+    text-align: center;
+}
+
+.not_found_logo {
+    width: 90px;
+    margin-bottom: 20px;
+}
+
+.not_found h1 {
+    font-size: 120px;
+    font-weight: 800;
+    color: #4040FB;
+    margin: 0;
+    line-height: 1;
+}
+
+.not_found h2 {
+    font-size: 32px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    color: #1f2937;
+}
+
+.not_found p {
+    color: #6b7280;
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.not_found_buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn_home,
+.btn_dashboard {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: 0.2s;
+}
+
+.btn_home {
+    background: #4040FB;
+    color: white;
+}
+
+.btn_dashboard {
+    background: white;
+    color: #4040FB;
+    border: 1px solid #4040FB;
+}
+
+.btn_home:hover,
+.btn_dashboard:hover {
+    transform: translateY(-2px);
+}
+
+@media (max-width: 600px) {
+
+    .not_found h1 {
+        font-size: 80px;
+    }
+
+    .not_found h2 {
+        font-size: 24px;
+    }
+
+    .not_found p {
+        font-size: 16px;
+    }
+
+    .not_found_buttons {
+        flex-direction: column;
+    }
+
+    .btn_home,
+    .btn_dashboard {
+        width: 100%;
+    }
+}
