@@ -12,25 +12,99 @@ import TaskCalendar from "./components/taskcalendar/TaskCalendar";
 import Calendar from "./components/calendar/Calendar";
 import Landing from "./components/landing/Landing";
 import NotFound from "./components/notFound/NotFound";
+import ProtectedRoute from "./components/protectedRoute/ProtectedRoute";
 
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/kpis" element={<Kpis />} />
+        <Route path="/" element={<Landing />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/proyecto/:proyecto_id" element={<Proyecto />} />
-        <Route path="/proyecto/:proyecto_id/tarea/:tarea_id" element={<TareaHija />} />
-        <Route path="/proyecto_miembro/:proyecto_id" element={<ProyectoMember />}/>
-        <Route path="/proyecto_miembro/:proyecto_id/tarea/:tarea_id" element={<ProyectoMemberHijo />}/>
-        <Route path="/proyecto-kpi/:proyectoId" element={<KpisProyect />}/>
-        <Route path="/proyecto/:proyectoId/calendar" element={<TaskCalendar />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="/" element={<Landing />} />
+
+        <Route
+          path="/kpis"
+          element={
+            <ProtectedRoute>
+              <Kpis />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/proyecto/:proyecto_id"
+          element={
+            <ProtectedRoute>
+              <Proyecto />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/proyecto/:proyecto_id/tarea/:tarea_id"
+          element={
+            <ProtectedRoute>
+              <TareaHija />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/proyecto_miembro/:proyecto_id"
+          element={
+            <ProtectedRoute>
+              <ProyectoMember />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/proyecto_miembro/:proyecto_id/tarea/:tarea_id"
+          element={
+            <ProtectedRoute>
+              <ProyectoMemberHijo />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/proyecto-kpi/:proyectoId"
+          element={
+            <ProtectedRoute>
+              <KpisProyect />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/proyecto/:proyectoId/calendar"
+          element={
+            <ProtectedRoute>
+              <TaskCalendar />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/calendar"
+          element={
+            <ProtectedRoute>
+              <Calendar />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="*" element={<NotFound />} />
-        </Routes>
+      </Routes>
     </BrowserRouter>
   );
 }

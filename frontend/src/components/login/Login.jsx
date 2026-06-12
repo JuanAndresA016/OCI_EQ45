@@ -33,46 +33,45 @@ useEffect(() =>{
 const [error, SetError] = useState("");
 
 
-  const login = async (email, password) => {
+ const login = async (email, password) => {
+  if (!email || !password) {
+    SetError("Llena todos los campos");
+    setTimeout(() => SetError(""), 5000);
+    return;
+  }
 
-    if(email == "" || password == ""){
-      SetError("Llena todos los campos");
-      setTimeout(() => {
-          SetError("");
-      }, 5000)
-    }else{
-
-    
+  try {
     const response = await fetch(`${API_URL}/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({
-        email: email,
-        password: password
-      })
+      body: JSON.stringify({ email, password })
     });
 
-    const data = await response.json();
+    const data = await response.json().catch(() => null);
 
-    if("message" in data){
-      SetError(data.message);
-      setTimeout(() =>{
-        SetError("")
-      },5000)
+    if (!response.ok) {
+      SetError(data?.message || "Correo o contraseña incorrectos");
+      setTimeout(() => SetError(""), 5000);
+      return;
     }
-    else{
 
-    
-    console.log(data);
+    if (!data?.token) {
+      SetError("No se recibió token de autenticación");
+      setTimeout(() => SetError(""), 5000);
+      return;
+    }
 
     localStorage.setItem("token", data.token);
-    window.location.href = "/dashboard"
-    }
+    window.location.href = "/dashboard";
 
+  } catch (error) {
+    console.error(error);
+    SetError("No se pudo conectar con el servidor");
+    setTimeout(() => SetError(""), 5000);
   }
-  };
+};
 
   return (
     <>

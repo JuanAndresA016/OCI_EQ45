@@ -8,69 +8,67 @@ export default function Register() {
     const [erroMessage, SetErrorMessage] = useState("");
 
     const registrar = async () => {
+    const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
+    const email = document.getElementById("correo").value;
+    const password = document.getElementById("contrasena").value;
 
-        const nombre = document.getElementById("nombre").value;
-        const apellido = document.getElementById("apellido").value;
-        const email = document.getElementById("correo").value
-        const password = document.getElementById("contrasena").value;
+    if (!nombre || !apellido || !email || !password) {
+        SetErrorMessage("Llena todos los campos");
+        setTimeout(() => SetErrorMessage(""), 5000);
+        return;
+    }
 
-        if(nombre == "" || apellido == "" || email == "" || password == ""){
-            SetErrorMessage("Llena todos los campos")
-            setTimeout(() => {
-                SetErrorMessage("");
-            }, 5000)
-        }else{
-
-        
-
+    try {
         const response = await fetch(`${API_URL}/auth/register`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                nombre: nombre,
-                apellido: apellido,
-                email: email,
-                password: password,
+                nombre,
+                apellido,
+                email,
+                password,
                 rolId: null
             })
         });
 
+        const data = await response.json().catch(() => null);
 
-        const data = await response.json();
-
-        if("message" in data){
-            SetErrorMessage(data.message);
-            setTimeout(() => {
-                SetErrorMessage("");
-            }, 5000)
+        if (!response.ok) {
+            SetErrorMessage(data?.message || "No se pudo registrar el usuario");
+            setTimeout(() => SetErrorMessage(""), 5000);
+            return;
         }
-        else{
-            console.log(data.message);
 
         SetSuccessMessage("¡Ahora puedes iniciar sesión!");
+        SetErrorMessage("");
 
-        }
-        
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1500);
+
+    } catch (error) {
+        console.error(error);
+        SetErrorMessage("No se pudo conectar con el servidor");
+        setTimeout(() => SetErrorMessage(""), 5000);
     }
-    };
+};
 
     function postForm() {
+    if (document.getElementById("contrasena").value !== document.getElementById("passConf").value) {
+        SetErrorMessage("Las contraseñas no coinciden");
 
-        if ( document.getElementById("contrasena").value != document.getElementById("passConf").value) {
-            SetErrorMessage("Las contraseñas no coinciden");
+        setTimeout(() => {
+            SetErrorMessage("");
+        }, 5000);
 
-            setTimeout(() => {
-                SetErrorMessage("");
-            }, 5000)
-        } else {
-            registrar(document.getElementById("nombre").value, document.getElementById("correo").value, document.getElementById("contrasena").value, null);
-
-        }
-
+        return;
     }
 
+    registrar();
+}
 
 
     return (<>
@@ -124,7 +122,7 @@ export default function Register() {
                                 <label htmlFor="passConf">Confirmar contraseña</label>
                                 <input type="password" name="" id="passConf" />
 
-                                <button type="submit">Login</button>
+                                <button type="submit">Registrarse</button>
                             </form>
 
 

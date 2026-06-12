@@ -37,7 +37,7 @@ import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 //                             <span>Metricas de rendimiento del equipo y proyectos</span>
 
 //                             </div>
-                            
+
 //                             <Progress />
 
 //                             <div className="dashboard_container_content_metrics">
@@ -71,13 +71,13 @@ import { API_URL, EMBEDDINGS_URL } from "../../services/api";
 //                         </div>
 
 
-                        
 
-                        
+
+
 //                     </div>
 //                 </div>
 //             </div>      
-        
+
 //         </>
 //     )
 // }
@@ -142,7 +142,7 @@ export default function Kpis() {
                 throw new Error("Error al actualizar");
             }
 
-             const nuevo = await fetch(
+            const nuevo = await fetch(
                 `${API_URL}/api/proyectos/creador/${user.id}`
             );
 
@@ -152,7 +152,7 @@ export default function Kpis() {
 
             setDataObj(nuevoProyecto);
 
-            
+
 
             setEditMode(false);
             setEditId(null);
@@ -351,33 +351,33 @@ export default function Kpis() {
 
                     <div className="dasboard_container_content_projects">
                         <h2>Mis proyectos</h2>
-                        
+
 
 
                         <div className="content_projects_myprojects">
                             {loading ? (
                                 <OrbitProgress color="#4040FB" size="medium" />
-                            ) : proyectos.length === 0 ? (
+                            ) : proyectos.length === 0 && proyectos2.length === 0 ? (
                                 <span>No tienes proyectos activos</span>
                             ) : (
-                                proyectos.map((item) => (
+                                [...proyectos, ...proyectos2].map((item) => (
                                     <div className="content_projects_myproyects_element" key={item.id}>
 
                                         <a href={`/proyecto/${item.id}/calendar`}>
                                             Portal proyecto {item.nombre} <i className="fa-solid fa-angle-right"></i>
                                         </a>
 
-                                       
 
-                                       
+
+
 
                                         <div className="members">
                                             <span>
-                                                <i className="fa-regular fa-user"></i> {item.miembros } miembros
+                                                <i className="fa-regular fa-user"></i> {item.miembros} miembros
                                             </span>
                                         </div>
 
-                                       
+
                                     </div>
                                 ))
                             )}
