@@ -189,4 +189,8 @@ public class TareaService {
                         ((Number) r[4]).longValue()))
                 .toList();
     }
+
+    public List<Tarea> obtenerTareasVisiblesParaPersona(Long proyectoId, Long personaId) {
+    return repo.findTareasVisiblesParaPersona(proyectoId, personaId);
+}
 }

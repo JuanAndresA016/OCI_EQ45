@@ -110,4 +110,21 @@ public interface TareaRepository extends JpaRepository<Tarea, Long> {
     List<Object[]> obtenerTareasCompletadas(@Param("proyectoId") Long proyectoId);
 
     List<Tarea> findByProyectoId(Long proyectoId);
+
+    @Query(value = """
+    SELECT DISTINCT T.*
+    FROM TAREAS T
+    LEFT JOIN TAREASROLES TR ON TR.TAREA_ID = T.TAREA_ID
+    LEFT JOIN PERSONA_ROL PR ON PR.ROL_ID = TR.ROL_ID
+    WHERE T.PROYECTO_ID = :proyectoId
+    AND (
+        PR.PERSONA_ID = :personaId
+        OR TR.TAREA_ID IS NULL
+    )
+    ORDER BY T.FECHA_FIN ASC
+""", nativeQuery = true)
+List<Tarea> findTareasVisiblesParaPersona(
+        @Param("proyectoId") Long proyectoId,
+        @Param("personaId") Long personaId
+);
 }
